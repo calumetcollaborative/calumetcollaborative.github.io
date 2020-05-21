@@ -41,7 +41,8 @@
 .control-window{
     background-color: #ffffff;
     color: #353535;
-    font: 14px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
+    font: 14px/1.5 'Open Sans', sans-serif;
+    /* 14px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif; */
 }
 
 
@@ -60,7 +61,8 @@
     width: 28px;
     height: 28px;
     border-radius: 100%;
-    font: 16px/14px Tahoma, Verdana, sans-serif;
+    font: 16px/14px 'Open Sans', sans-serif;
+    /*16px/14px Tahoma, Verdana, sans-serif; */
     cursor: pointer;
     z-index:30;
 
