@@ -27,6 +27,9 @@
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+        <link rel="stylesheet" href="css/font.css">
 		<!-- Mapping - Leaflet and Plugins
 			 Once you find a plugin you like, download the css and js files and place them in their corresponding subfolders.
 		     Bring them into the HTML map itself and tell it where to find them like line 27 below. 
@@ -70,6 +73,8 @@
             height: 100%;
             padding: 0;
             margin: 0;
+            font-family: "Open Sans", sans-serif;
+            font-size: 13px;
         }
         </style>
         <title>Calumet Collaborative Mapping Project</title>
@@ -1634,7 +1639,7 @@
         })
         .show()
         
-		// Search by brownfield site locations
+		// Search by RCRA brownfield site locations
 		map.addControl(new L.Control.Search({
             layer: layer_RCRAHazardousWaste_25,
             initial: false,
