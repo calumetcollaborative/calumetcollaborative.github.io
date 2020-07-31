@@ -159,6 +159,13 @@
       .sidebar.leaflet-touch {
         border: 2px solid rgba(0, 0, 0, 0.2); } }
 
+.sidebar-logo img{
+    display: block;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 @media (min-width: 768px) {
   .sidebar-left ~ .sidebar-map .leaflet-left {
     transition: left 500ms; } }
