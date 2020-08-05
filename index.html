@@ -45,6 +45,8 @@
         <script src="js/rbush.min.js"></script>
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
+		<!-- Omnivore -->
+		<script src="js/leaflet-omnivore.js"></script>        
 		<!-- TopoJSON -->
 		<script src="js/topojson.js"></script>
 		<!-- Vector Grid -->
@@ -56,8 +58,8 @@
 		<link rel="stylesheet" href="css/leaflet-defaultextent.css">
 		<script src="js/leaflet-defaultextent.js"></script>
 		<!-- Search -->
-		<link rel="stylesheet" href="css/leaflet-search.css">
-		<script src="js/leaflet-search.js"></script>
+		<link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+		<script src="js/leaflet-control-geocoder.Geocoder.js"></script>
 		<!-- Grouped Layer Control -->	
 		<link rel="stylesheet" href="css/leaflet-groupedlayercontrol.css" />
 		<script src="js/leaflet-groupedlayercontrol.js"></script> 
@@ -77,7 +79,7 @@
             font-size: 13px;
         }
         </style>
-        <title>Calumet Collaborative Mapping Project</title>
+        <title>Calumet Reinvestment Mapping Tool</title>
     </head>
     <body>
 		<!-- Sidebar -->
@@ -100,16 +102,153 @@
 			<!-- Tab panes -->
 			<div class="sidebar-content">
 				<div class="sidebar-pane" id="home">
-					<h1 class="sidebar-header">Calumet Collaborative Mapping Project<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+					<h1 class="sidebar-header">Calumet Reinvestment Mapping Tool<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
 					<p></p>
-					<p>The mission of the Calumet Collaborative Mapping Project is to put underutilized sites back into productive reuse. The purpose of this map is to create a baseline of Brownfield and underutilized sites in the Calumet region, so we can plan for the best future use of these sites. Additional information, such as transportation assets, economic development tools, environmental data, and social vulnerability information, helps aid decision making when determining best future use of a site. This mapping tool is made by the partners of Calumet Collaborative so we can collectively address Brownfield Redevelopment as a way to advance sustainable development in the region.</p>
+					<p>The mission of the Calumet Reinvestment Mapping Tool is to put underutilized sites back into productive reuse. The purpose of this map is to create a baseline of Brownfield and underutilized sites in the Calumet region, so we can plan for the best future use of these sites. Additional information, such as transportation assets, economic development tools, environmental data, and social vulnerability information, helps aid decision making when determining best future use of a site. This mapping tool is made by the partners of Calumet Collaborative so we can collectively address Brownfield Redevelopment as a way to advance sustainable development in the region.</p>
 					<p>Calumet Collaborative catalyzes innovative partnerships between Illinois and Indiana community, government, business and nonprofit stakeholders to advance sustainable development in the Calumet region.</p>
-					<p>For more information on Calumet Collaborative and the Brownfield Redevelopment initiative, please visit <a href="calumetcollaborative.org">calumetcollaborative.org</a> or reach out to Sarah Coulter at <a href="mailto:sarah@calumetcollaborative.org">sarah@calumetcollaborative.org</a></p>
-				</div>
+					<p>For more information on Calumet Collaborative and its Reinvestment Mapping Tool, please visit <a href="http://www.calumetcollaborative.org/">calumetcollaborative.org</a> or reach out to Sarah Coulter at <a href="mailto:sarah@calumetcollaborative.org">sarah@calumetcollaborative.org</a></p>
+                    <br>
+                    <div class="sidebar-logo"><img src="css/images/CC_logo_large.png" alt="Calumet Collaborative";></div class="sidebar-logo">
+                </div>
 				<div class="sidebar-pane" id="sources">
 					<h1 class="sidebar-header">Data Sources<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
 					<p></p>
-					<p>Bullet list of data sources here</a>.</p>
+					<p><b>Brownfield Sites</b></p>
+                        <ul><b>Layer Name: RCRA (Hazardous Waste)</b><ul>
+                            <li>Agency: US Environmental Protection Agency (IEPA)</li></li>
+                            <li>Download Link: <a href=https://ofmpub.epa.gov/apex/cimc/f?p=CIMC:RCRA_SEARCH:0::::P15_REG:05>RCRA Sites</a></li>
+                            <li>Download Date: 10/5/2019</li>
+                            <li>Last Updated: Spring 2019</li>
+                        </ul></ul>
+                        <p></p>
+                        <ul><b>Layer Name: EPA Brownfields</b><ul>
+                            <li>Agency: US Environmental Protection Agency (EPA)</li>
+                            <li>Download Link: <a href=https://www.epa.gov/frs/epa-frs-facilities-state-single-file-csv-download>FRS Facilities</a></li>
+                            <li>Download Date: 4/3/2019</li>
+                            <li>Last Updated: 3/29/2019</li>
+                        </ul></ul>
+                        <p></p>
+                        <ul><b>Layer Name: Closed Landfills</b><ul>
+                            <li>Agency: US Environmental Protection Agency (EPA)</li>
+                            <li>Download Link: <a href=https://www.epa.gov/lmop/project-and-landfill-data-state>Closed Landfills</a></li>
+                            <li>Download Date: 4/24/2019</li>
+                            <li>Last Updated: 2/1/2019</li>
+                        </ul></ul>
+                        <p></p>
+                        <ul><b>Layer Name: Superfund Sites</b><ul>
+                            <li>Agency: National Oceanic and Atmospheric Administration (NOAA)</li>
+                            <li>Download Link: <a href=https://catalog.data.gov/dataset/superfund-sites1e8f4>Superfund Sites</a></li>
+                            <li>Download Date: 4/10/2019</li>
+                            <li>Last Updated: 11/17/2018</li>
+                        </ul></ul>
+                        <p></p>
+                        <ul><b>Layer Names: IL Site Remediation Program, IL No Further Remediation</b><ul>
+                            <li>Agency: Illinois Environmental Protection Agency (IEPA)</li>
+                            <li>Download Link: <a href=https://www2.illinois.gov/epa/topics/cleanup-programs/bol-database/Pages/srp.aspx>Site Remediation Program</a></li>
+                            <li>Download Date: 10/5/2019</li>
+                            <li>Last Updated: 2019</li>
+                        </ul></ul> 
+                        <p></p>
+                        <ul><b>Layer Name: IN Brownfields Program</b><ul>
+                            <li>Agency: Indiana Department of Environmental Management (IDEM)</li>
+                            <li>Download Link: <a href=https://catalog.data.gov/dataset/land-use-and-land-cover-brownfields-idem-in-brownfield-locations-in-indiana-indiana-department3f49a>Brownfield Program</a></li>
+                            <li>Download Date: 10/5/2019</li>
+                            <li>Last Updated: 2019</li>
+                        </ul></ul> 
+                        <p></p>
+                        <ul><b>Layer Names: IN State Cleanup, IN No Further Remediation</b><ul>
+                            <li>Agency: Indiana Department of Environmental Management (IDEM)</li>
+                            <li>Download Link: <a href=https://www.in.gov/idem/cleanups/2349.htm>State Cleanup Sites</a></li>
+                            <li>Download Date: 10/5/2019</li>
+                            <li>Last Updated: 2019</li>
+                        </ul></ul>    
+                        <p></p>
+                        <ul><b>Layer Name: IL Leaking Underground Storage</b><ul>
+                            <li>Agency: Illinois Environmental Protection Agency (IEPA)</li>
+                            <li>Download Link: <a href=https://www2.illinois.gov/epa/topics/cleanup-programs/bol-database/Pages/leaking-ust.aspx>Leaking Underground Storage</a></li>
+                            <li>Download Date: 10/5/2019</li>
+                            <li>Last Updated: 2019</li>
+                        </ul></ul> 
+                        <p></p>
+                        <ul><b>Layer Name: IL State Response Action Sites</b><ul>
+                            <li>Agency: Illinois Environmental Protection Agency (IEPA)</li>
+                            <li>Download Link: <a href=https://www2.illinois.gov/epa/topics/cleanup-programs/bol-database/Pages/ssu.aspx>State Response Action Sites</a></li>
+                            <li>Download Date: 10/5/2019</li>
+                            <li>Last Updated: 2019</li>
+                        </ul></ul>  
+                        <p></p>
+                        <p></p>
+                    <p><b>Economic</b></p>
+                        <ul><b>Layer Names: Opportunity Zones, New Market Tax Credits (NMTC)</b><ul>
+                            <li>Agency: US Internal Revenue Service (IRS)</li>
+                            <li>Download Link: <a href=https://www.cdfifund.gov/Pages/Opportunity-Zones.aspx>CDIF Opportunity Zones</a></li>
+                            <li>Download Date: 4/25/2019</li>
+                            <li>Last Updated: N/A</li>
+                        </ul></ul>
+                        <p></p>
+                        <ul><b>Layer Name: Tax Increment Financing (TIF)</b><ul>
+                            <li>Agencies: Northwestern Indiana Regional Planning Commission (NIRPC), Cook County, City of Chicago</li>
+                            <li>Download Links: Indiana TIF - Emailed, <a href=https://datacatalog.cookcountyil.gov/GIS-Maps/ccgisdata-Tax-Increment-Financing-TIF-Districts-20/5dup-xpsj>Cook County TIF</a>, <a href=https://data.cityofchicago.org/Community-Economic-Development/Boundaries-Tax-Increment-Financing-Districts/fz5x-7zak>City of Chicago TIF</a></li>
+                            <li>Download Date: 5/14/2019</li>
+                            <li>Last Updated: 5/7/2019, 7/20/2017, 3/19/2019</li>
+                        </ul></ul>
+                        <p></p>
+                        <ul><b>Layer Name: HUB Zones</b><ul>
+                            <li>Agency: US Small Business Administration (SBA)</li>
+                            <li>Download Link: <a href=https://catalog.data.gov/dataset/u-s-small-business-hubzone-qualitfied-census-tracts-5b5ab>Hub Zones</a></li>
+                            <li>Download Date: 5/8/2019</li>
+                            <li>Last Updated: 11/14/2018</li>
+                        </ul></ul>
+                        <p></p>
+                        <p></p>
+                    <p><b>Social</b><p>
+                        <ul><b>Layer Name: Social Vulnerability Index</b><ul>
+                            <li>Agency: Centers for Disease Control and Prevention (CDC)</li>
+                            <li>Download Link: <a href=https://svi.cdc.gov/data-and-tools-download.html>Social Vulnerability Index</a></li>
+                            <li>Download Date: 4/24/2019</li>
+                            <li>Last Updated: 5/19/2016</li>
+                        </ul></ul>
+                        <p></p>
+                        <p></p>
+                    <p><b>Zoning</b><p>
+                        <ul><b>Layer Name: IN Zoning</b><ul>
+                            <li>Agencies: Northwestern Indiana Regional Planning Commission (NIRPC)</li>
+                            <li>Download Link: Beverly Shores, Burns Harbor, Cedar Lake, Crown Point, Dune Acres, Dyer, East Chicago, Griffith, Hammond, Highland, LaPorte, Lowell, Munster, Porter, Ross, Valparaiso, Whiting, Winfield - Emailed</li>
+                            <li>Download Date: 10/5/2019</li>
+                            <li>Last Updated: 2019</li>
+                        </ul></ul>
+                        <p></p>
+                        <ul><b>Layer Name: Cook County Zoning</b><ul>
+                            <li>Agencies: South Suburban Mayors and Managers Association, City of Chicago</li>
+                            <li>Download Link: Cook County - Emailed, <a href=https://data.cityofchicago.org/Community-Economic-Development/Boundaries-Zoning-Districts-current-/7cve-jgbp>City of Chicago Zoning</a></li>
+                            <li>Download Date: 5/16/2019</li>
+                            <li>Last Updated: 4/1/2019, 7/1/2018</li>
+                        </ul></ul>
+                        <p></p>
+                        <p></p>
+                    <p><b>Land Use</b><p>
+                        <ul><b>Layer Name: Land Use</b><ul>
+                            <li>Agency: Chicago Metropolitan Agency for Planning (CMAP)</li>
+                            <li>Download Link: <a href=https://www.cmap.illinois.gov/data/land-use/inventory>Land Use Inventory</a></li>
+                            <li>Download Date: 2/1/2019</li>
+                            <li>Last Updated: 2014</li>
+                        </ul></ul>
+                        <p></p>
+                        <p></p>
+                    <p><b>Environmental</b><p>
+                        <ul><b>Layer Names: Minimal or Reduced Flood Hazard, 100 Year Flood Plain, 500 Year Flood Plain, Wetlands</b><ul>
+                            <li>Agency: Federal Emergency Management Agency (FEMA)</li>
+                            <li>Download Link: <a href=https://www.floodmaps.fema.gov/NFHL/status.shtml>National Flood Hazard Layer (NFHL)</a></li>
+                            <li>Download Date: 4/10/2019</li>
+                            <li>Last Updated: 3/1/2019</li>
+                        </ul></ul>
+                        <p></p>
+                        <ul><b>Layer Name: USGS Protected Areas</b><ul>
+                            <li>Agency: United States Geological Services (USGS)</li>
+                            <li>Download Link: <a href=https://www.usgs.gov/core-science-systems/science-analytics-and-synthesis/gap/science/protected-areas>USGS Protected Areas</a></li>
+                            <li>Download Date: 5/18/2019</li>
+                            <li>Last Updated: Spring 2019</li>
+                        </ul></ul>
 				</div>
 				<!-- Additional panes, not needed for now
 				<div class="sidebar-pane" id="profile">
@@ -156,30 +295,7 @@
         <script src="data/RCRAHazardousWaste_25.js"></script>
         <script>
 
-        
-		// TopoJSON function to extend existing GeoJSON loading function
-		L.TopoJSON = L.GeoJSON.extend({  
-		  addData: function(jsonData) {    
-			if (jsonData.type === 'Topology') {
-			  for (key in jsonData.objects) {
-				geojson = topojson.feature(jsonData, jsonData.objects[key]);
-				L.GeoJSON.prototype.addData.call(this, geojson);
-			  }
-			}    
-			else {
-			  L.GeoJSON.prototype.addData.call(this, jsonData);
-			}
-		  }  
-		});
-		// Copyright (c) 2013 Ryan Clark		     
-		// Define a function to get and parse geojson from URL
-		async function getGeoData(url) {
-			let response = await fetch(url);
-			let data = await response.json();
-			console.log(data)
-			return data;
-		}
-      	  
+            	  
 		var map = L.map('map', {
             zoomControl:true,
 			defaultExtentControl: true,			
@@ -220,9 +336,9 @@
 	
 // Start of TopoJSON layers - must be handled individually by changing 2 key lines
 		// From: var layer_USGSProtectedAreas_2 = new L.geoJson(json_USGSProtectedAreas_2, {
-		// To: var layer_USGSProtectedAreas_2 = new L.TopoJSON(null, 
+		// To: var layer_USGSProtectedAreas_2 = new L.geoJson(null, 
 		// After var layer_USGSProtectedAreas_2 is defined, add: 
-		//      getGeoData('data/USGSProtectedAreas_2.json').then(data => layer_USGSProtectedAreas_2.addData(data));
+		//      omnivore.topojson('data/USGSProtectedAreas_2.json', null, layer_USGSProtectedAreas_2);
 
 //************************************************************	
 
@@ -250,13 +366,13 @@
         map.createPane('pane_USGSProtectedAreas_2');
         map.getPane('pane_USGSProtectedAreas_2').style.zIndex = 402;
         map.getPane('pane_USGSProtectedAreas_2').style['mix-blend-mode'] = 'normal';
-        var layer_USGSProtectedAreas_2 = new L.TopoJSON(null, {
+        var layer_USGSProtectedAreas_2 = new L.geoJson(null, {
             attribution: '',
             pane: 'pane_USGSProtectedAreas_2',
             onEachFeature: pop_USGSProtectedAreas_2,
             style: style_USGSProtectedAreas_2_0,
         });
-		getGeoData('data/USGSProtectedAreas_2.json').then(data => layer_USGSProtectedAreas_2.addData(data));
+        omnivore.topojson('data/USGSProtectedAreas_2.json', null, layer_USGSProtectedAreas_2)
 		bounds_group.addLayer(layer_USGSProtectedAreas_2);
         function pop_Wetlands_3(feature, layer) {
         }
@@ -278,13 +394,13 @@
         map.createPane('pane_Wetlands_3');
         map.getPane('pane_Wetlands_3').style.zIndex = 403;
         map.getPane('pane_Wetlands_3').style['mix-blend-mode'] = 'normal';
-		var layer_Wetlands_3 = new L.TopoJSON(null, {
+		var layer_Wetlands_3 = new L.geoJSON(null, {
             attribution: '',
             pane: 'pane_Wetlands_3',
             onEachFeature: pop_Wetlands_3,
             style: style_Wetlands_3_0,
         });
-		getGeoData('data/Wetlands_3.json').then(data => layer_Wetlands_3.addData(data));
+        omnivore.topojson('data/Wetlands_3.json', null, layer_Wetlands_3)
         bounds_group.addLayer(layer_Wetlands_3);
         function pop_500YearFloodPlain_4(feature, layer) {
         }
@@ -306,13 +422,13 @@
         map.createPane('pane_500YearFloodPlain_4');
         map.getPane('pane_500YearFloodPlain_4').style.zIndex = 404;
         map.getPane('pane_500YearFloodPlain_4').style['mix-blend-mode'] = 'normal';
-        var layer_500YearFloodPlain_4 = new L.TopoJSON(null, {
+        var layer_500YearFloodPlain_4 = new L.geoJSON(null, {
             attribution: '',
             pane: 'pane_500YearFloodPlain_4',
             onEachFeature: pop_500YearFloodPlain_4,
             style: style_500YearFloodPlain_4_0,
         });
-        getGeoData('data/500YearFloodPlain_4.json').then(data => layer_500YearFloodPlain_4.addData(data));
+        omnivore.topojson('data/500YearFloodPlain_4.json', null, layer_500YearFloodPlain_4)
 		bounds_group.addLayer(layer_500YearFloodPlain_4);
         function pop_100YearFloodPlain_5(feature, layer) {
         }
@@ -334,13 +450,13 @@
         map.createPane('pane_100YearFloodPlain_5');
         map.getPane('pane_100YearFloodPlain_5').style.zIndex = 405;
         map.getPane('pane_100YearFloodPlain_5').style['mix-blend-mode'] = 'normal';
-        var layer_100YearFloodPlain_5 = new L.TopoJSON(null, {
+        var layer_100YearFloodPlain_5 = new L.geoJSON(null, {
             attribution: '',
             pane: 'pane_100YearFloodPlain_5',
             onEachFeature: pop_100YearFloodPlain_5,
             style: style_100YearFloodPlain_5_0,
         });
-        getGeoData('data/100YearFloodPlain_5.json').then(data => layer_100YearFloodPlain_5.addData(data));
+        omnivore.topojson('data/100YearFloodPlain_5.json', null, layer_100YearFloodPlain_5)
 		bounds_group.addLayer(layer_100YearFloodPlain_5);
         function pop_MinimalorReducedFloodHazard_6(feature, layer) {
         }
@@ -362,13 +478,13 @@
         map.createPane('pane_MinimalorReducedFloodHazard_6');
         map.getPane('pane_MinimalorReducedFloodHazard_6').style.zIndex = 406;
         map.getPane('pane_MinimalorReducedFloodHazard_6').style['mix-blend-mode'] = 'normal';
-        var layer_MinimalorReducedFloodHazard_6 = new L.TopoJSON(null, {
+        var layer_MinimalorReducedFloodHazard_6 = new L.geoJSON(null, {
             attribution: '',
             pane: 'pane_MinimalorReducedFloodHazard_6',
             onEachFeature: pop_MinimalorReducedFloodHazard_6,
             style: style_MinimalorReducedFloodHazard_6_0,
         });
-        getGeoData('data/MinimalorReducedFloodHazard_6.json').then(data => layer_MinimalorReducedFloodHazard_6.addData(data));
+        omnivore.topojson('data/MinimalorReducedFloodHazard_6.json', null, layer_MinimalorReducedFloodHazard_6)
 		bounds_group.addLayer(layer_MinimalorReducedFloodHazard_6);
         function pop_LandUse_7(feature, layer) {
             var popupContent = '<table>\
@@ -517,15 +633,15 @@
         }
         map.createPane('pane_LandUse_7');
         map.getPane('pane_LandUse_7').style.zIndex = 407;
-        map.getPane('pane_LandUse_7').style['mix-blend-mode'] = 'normal';		
-        var layer_LandUse_7 = new L.TopoJSON(null, {
+        map.getPane('pane_LandUse_7').style['mix-blend-mode'] = 'normal';     
+        var layer_LandUse_7 = new L.geoJSON(null, {
             attribution: '',
             pane: 'pane_LandUse_7',
             onEachFeature: pop_LandUse_7,
             style: style_LandUse_7_0,
         });
-        getGeoData('data/LandUse_7.json').then(data => layer_LandUse_7.addData(data));
-		bounds_group.addLayer(layer_LandUse_7);		
+        omnivore.topojson('data/LandUse_7.json', null, layer_LandUse_7)
+		bounds_group.addLayer(layer_LandUse_7);
         function pop_CookCountyZoning_8(feature, layer) {
         }
 
@@ -662,13 +778,13 @@
         map.createPane('pane_CookCountyZoning_8');
         map.getPane('pane_CookCountyZoning_8').style.zIndex = 408;
         map.getPane('pane_CookCountyZoning_8').style['mix-blend-mode'] = 'normal';	
-        var layer_CookCountyZoning_8 = new L.TopoJSON(null, {
+        var layer_CookCountyZoning_8 = new L.geoJSON(null, {
             attribution: '',
             pane: 'pane_CookCountyZoning_8',
             onEachFeature: pop_CookCountyZoning_8,
             style: style_CookCountyZoning_8_0,
         });
-		getGeoData('data/CookCountyZoning_8.json').then(data => layer_CookCountyZoning_8.addData(data));
+        omnivore.topojson('data/CookCountyZoning_8.json', null, layer_CookCountyZoning_8)
         bounds_group.addLayer(layer_CookCountyZoning_8);		
         function pop_INZoning_9(feature, layer) {
         }
@@ -792,13 +908,13 @@
         map.createPane('pane_INZoning_9');
         map.getPane('pane_INZoning_9').style.zIndex = 409;
         map.getPane('pane_INZoning_9').style['mix-blend-mode'] = 'normal';
-        var layer_INZoning_9 = new L.TopoJSON(null, {
+        var layer_INZoning_9 = new L.geoJSON(null, {
             attribution: '',
             pane: 'pane_INZoning_9',
             onEachFeature: pop_INZoning_9,
             style: style_INZoning_9_0,
         });
-		getGeoData('data/INZoning_9.json').then(data => layer_INZoning_9.addData(data));
+        omnivore.topojson('data/INZoning_9.json', null, layer_INZoning_9)
         bounds_group.addLayer(layer_INZoning_9);
         function pop_SocialVulnerabilityIndex_10(feature, layer) {
         }
@@ -864,13 +980,13 @@
         map.createPane('pane_SocialVulnerabilityIndex_10');
         map.getPane('pane_SocialVulnerabilityIndex_10').style.zIndex = 410;
         map.getPane('pane_SocialVulnerabilityIndex_10').style['mix-blend-mode'] = 'normal';
-        var layer_SocialVulnerabilityIndex_10 = new L.TopoJSON(null, {
+        var layer_SocialVulnerabilityIndex_10 = new L.geoJSON(null, {
             attribution: '',
             pane: 'pane_SocialVulnerabilityIndex_10',
             onEachFeature: pop_SocialVulnerabilityIndex_10,
             style: style_SocialVulnerabilityIndex_10_0,
         });
-		getGeoData('data/SocialVulnerabilityIndex_10.json').then(data => layer_SocialVulnerabilityIndex_10.addData(data));
+        omnivore.topojson('data/SocialVulnerabilityIndex_10.json', null, layer_SocialVulnerabilityIndex_10)
         bounds_group.addLayer(layer_SocialVulnerabilityIndex_10);
         function pop_NewMarketTaxCreditsNMTC_11(feature, layer) {
         }
@@ -892,13 +1008,13 @@
         map.createPane('pane_NewMarketTaxCreditsNMTC_11');
         map.getPane('pane_NewMarketTaxCreditsNMTC_11').style.zIndex = 411;
         map.getPane('pane_NewMarketTaxCreditsNMTC_11').style['mix-blend-mode'] = 'normal';
-        var layer_NewMarketTaxCreditsNMTC_11 = new L.TopoJSON(null, {
+        var layer_NewMarketTaxCreditsNMTC_11 = new L.geoJSON(null, {
             attribution: '',
             pane: 'pane_NewMarketTaxCreditsNMTC_11',
             onEachFeature: pop_NewMarketTaxCreditsNMTC_11,
             style: style_NewMarketTaxCreditsNMTC_11_0,
         });
-        getGeoData('data/NewMarketTaxCreditsNMTC_11.json').then(data => layer_NewMarketTaxCreditsNMTC_11.addData(data));
+        omnivore.topojson('data/NewMarketTaxCreditsNMTC_11.json', null, layer_NewMarketTaxCreditsNMTC_11)
 		bounds_group.addLayer(layer_NewMarketTaxCreditsNMTC_11);
         function pop_HUBZones_12(feature, layer) {
         }
@@ -920,13 +1036,13 @@
         map.createPane('pane_HUBZones_12');
         map.getPane('pane_HUBZones_12').style.zIndex = 412;
         map.getPane('pane_HUBZones_12').style['mix-blend-mode'] = 'normal';
-        var layer_HUBZones_12 = new L.TopoJSON(null, {
+        var layer_HUBZones_12 = new L.geoJSON(null, {
             attribution: '',
             pane: 'pane_HUBZones_12',
             onEachFeature: pop_HUBZones_12,
             style: style_HUBZones_12_0,
         });
-        getGeoData('data/HUBZones_12.json').then(data => layer_HUBZones_12.addData(data));
+        omnivore.topojson('data/HUBZones_12.json', null, layer_HUBZones_12)
 		bounds_group.addLayer(layer_HUBZones_12);
         function pop_TaxIncrementFinancingTIF_13(feature, layer) {
         }
@@ -948,13 +1064,13 @@
         map.createPane('pane_TaxIncrementFinancingTIF_13');
         map.getPane('pane_TaxIncrementFinancingTIF_13').style.zIndex = 413;
         map.getPane('pane_TaxIncrementFinancingTIF_13').style['mix-blend-mode'] = 'normal';
-        var layer_TaxIncrementFinancingTIF_13 = new L.TopoJSON(null, {
+        var layer_TaxIncrementFinancingTIF_13 = new L.geoJSON(null, {
             attribution: '',
             pane: 'pane_TaxIncrementFinancingTIF_13',
             onEachFeature: pop_TaxIncrementFinancingTIF_13,
             style: style_TaxIncrementFinancingTIF_13_0,
         });
-		getGeoData('data/TaxIncrementFinancingTIF_13.json').then(data => layer_TaxIncrementFinancingTIF_13.addData(data));
+        omnivore.topojson('data/TaxIncrementFinancingTIF_13.json', null, layer_TaxIncrementFinancingTIF_13)
         bounds_group.addLayer(layer_TaxIncrementFinancingTIF_13);
         function pop_OpportunityZones_14(feature, layer) {
         }
@@ -976,13 +1092,13 @@
         map.createPane('pane_OpportunityZones_14');
         map.getPane('pane_OpportunityZones_14').style.zIndex = 414;
         map.getPane('pane_OpportunityZones_14').style['mix-blend-mode'] = 'normal';
-        var layer_OpportunityZones_14 = new L.TopoJSON(null, {
+        var layer_OpportunityZones_14 = new L.geoJSON(null, {
             attribution: '',
             pane: 'pane_OpportunityZones_14',
             onEachFeature: pop_OpportunityZones_14,
             style: style_OpportunityZones_14_0,
         });
-        getGeoData('data/OpportunityZones_14.json').then(data => layer_OpportunityZones_14.addData(data));
+        omnivore.topojson('data/OpportunityZones_14.json', null, layer_OpportunityZones_14)
         bounds_group.addLayer(layer_OpportunityZones_14);
 		
 		
@@ -1639,20 +1755,17 @@
         })
         .show()
         
-		// Search by RCRA brownfield site locations
-		map.addControl(new L.Control.Search({
-            layer: layer_RCRAHazardousWaste_25,
-            initial: false,
-            hideMarkerOnCollapse: true,
-			//filterData: (text, records) => records,
-            propertyName: 'PRIMARY_NA',
-			moveToLocation: function(latlng, title, map) {
-				map.setView(latlng, 16);  // Set the zoom to location
-			}
-		}));
-        document.getElementsByClassName('search-button')[0].className +=
-         ' fa fa-search';
-
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fa fa-search';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Search for a place';
+        
 		// Create the sidebar instance and add it to the map
 		var sidebar = L.control.sidebar('sidebar').addTo(map);
 
