@@ -88,7 +88,7 @@ function fnc_ln(values, context) {
 };
 
 function fnc_log10(values, context) {
-    return Math.LN10(values[0]);
+    return Math.log10(values[0]);
 };
 
 function fnc_log(values, context) {
@@ -757,7 +757,7 @@ function fnc_project_color(values, context) {
 
 
 
-function LandUse_7rule0_eval_expression(context) {
+function exp_LandUse_8rule0_eval_expression(context) {
     // NewJoin_Fu = 'Agriculture'
 
     var feature = context.feature;
@@ -770,7 +770,7 @@ function LandUse_7rule0_eval_expression(context) {
 }
 
 
-function LandUse_7rule1_eval_expression(context) {
+function exp_LandUse_8rule1_eval_expression(context) {
     // NewJoin_Fu = 'Commercial'
 
     var feature = context.feature;
@@ -783,7 +783,7 @@ function LandUse_7rule1_eval_expression(context) {
 }
 
 
-function LandUse_7rule2_eval_expression(context) {
+function exp_LandUse_8rule2_eval_expression(context) {
     // NewJoin_Fu = 'Industrial'
 
     var feature = context.feature;
@@ -796,7 +796,7 @@ function LandUse_7rule2_eval_expression(context) {
 }
 
 
-function LandUse_7rule3_eval_expression(context) {
+function exp_LandUse_8rule3_eval_expression(context) {
     // NewJoin_Fu = 'Institutional'
 
     var feature = context.feature;
@@ -809,7 +809,7 @@ function LandUse_7rule3_eval_expression(context) {
 }
 
 
-function LandUse_7rule4_eval_expression(context) {
+function exp_LandUse_8rule4_eval_expression(context) {
     // NewJoin_Fu = 'Open Space'
 
     var feature = context.feature;
@@ -822,7 +822,7 @@ function LandUse_7rule4_eval_expression(context) {
 }
 
 
-function LandUse_7rule5_eval_expression(context) {
+function exp_LandUse_8rule5_eval_expression(context) {
     // NewJoin_Fu = 'Residential'
 
     var feature = context.feature;
@@ -835,7 +835,7 @@ function LandUse_7rule5_eval_expression(context) {
 }
 
 
-function LandUse_7rule6_eval_expression(context) {
+function exp_LandUse_8rule6_eval_expression(context) {
     // NewJoin_Fu  IN ('Utilities_Transportation', 'Construction', 'Other')
 
     var feature = context.feature;
@@ -848,7 +848,7 @@ function LandUse_7rule6_eval_expression(context) {
 }
 
 
-function LandUse_7rule7_eval_expression(context) {
+function exp_LandUse_8rule7_eval_expression(context) {
     // NewJoin_Fu = 'Vacant_Agr'
 
     var feature = context.feature;
@@ -861,7 +861,7 @@ function LandUse_7rule7_eval_expression(context) {
 }
 
 
-function LandUse_7rule8_eval_expression(context) {
+function exp_LandUse_8rule8_eval_expression(context) {
     // NewJoin_Fu  IN ('Vacant_Com', 'Vacant_Ind', 'Vacant_Other', 'Vacant_Res', 'Vacant_Uti')
 
     var feature = context.feature;

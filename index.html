@@ -10,8 +10,7 @@
 	
 <!-- Current Version Part 1 - Start Copy Here
 	 Contains header information, links to JS and CSS folders for plugins,
-	 HTML containers and formatting for sidebar, links to JS data scripts,
-	 functions for importing TopoJSON, deafault map attributes, and base maps -->
+	 HTML containers and formatting for sidebar -->
 
 <!-- ************************************************************ -->	
 
@@ -38,6 +37,7 @@
         <link rel="stylesheet" href="css/leaflet.css">
         <script src="js/qgis2web_expressions.js"></script>
         <script src="js/leaflet.js"></script>
+        <script src="js/multi-style-layer.js"></script>
         <script src="js/leaflet.rotatedMarker.js"></script>
         <script src="js/leaflet.pattern.js"></script>
         <script src="js/leaflet-hash.js"></script>
@@ -267,21 +267,50 @@
 		</div>
 		<!-- Map output -->
 		<div id="map" class="sidebar-map"></div>
-		<!-- Background layers converted to TopoJSON to improve performance 
-        <script src="data/USGSProtectedAreas_2.js"></script>
-        <script src="data/Wetlands_3.js"></script>
-        <script src="data/500YearFloodPlain_4.js"></script>
-        <script src="data/100YearFloodPlain_5.js"></script>
-        <script src="data/MinimalorReducedFloodHazard_6.js"></script>
-        <script src="data/LandUse_7.js"></script>		
-		<script src="data/CookCountyZoning_8.js"></script>
-		<script src="data/INZoning_9.js"></script>
-        <script src="data/SocialVulnerabilityIndex_10.js"></script>
-		<script src="data/NewMarketTaxCreditsNMTC_11.js"></script>
-        <script src="data/HUBZones_12.js"></script
-		<script src="data/TaxIncrementFinancingTIF_13.js"></script>
-        <script src="data/OpportunityZones_14.js"></script>        
-		End of TopoJSON layers -->		
+        
+        
+        
+        
+        
+        <!-- ************************************************************ -->	
+	
+        <!-- Current Version Part 1 - End Copy Here -->
+
+        <!-- ************************************************************ -->
+
+
+        
+        
+
+        <!-- ************************************************************ -->	
+	
+        <!-- Comment out layers converted to TopoJSON or Tiles to improve performance  -->
+
+        <!-- ************************************************************ -->
+
+
+
+
+
+		<!-- Start of TopoJSON and Tile Layers
+        <script src="data/SocialVulnerabilityIndex_2.js"></script>
+        <script src="data/MinimalorReducedFloodHazard_3.js"></script>
+        <script src="data/100YearFloodPlain_4.js"></script>
+        <script src="data/500YearFloodPlain_5.js"></script>
+        <script src="data/Wetlands_6.js"></script>
+        <script src="data/USGSProtectedAreas_7.js"></script>
+        
+        ***** Start of Tile Layers *****
+        <script src="data/LandUse_8.js"></script>
+        <script src="data/CookCountyZoning_9.js"></script>
+        <script src="data/INZoning_10.js"></script>
+        ***** End of Tile layers *****
+        
+        <script src="data/NewMarketTaxCreditsNMTC_11.js"></script>
+        <script src="data/HUBZones_12.js"></script>
+        <script src="data/TaxIncrementFinancingTIF_13.js"></script>
+        <script src="data/OpportunityZones_14.js"></script>
+        End of TopoJSON and Tile layers -->	
         <script src="data/ILStateResponseActionSites_15.js"></script>
         <script src="data/ILLeakingUndergroundStorage_16.js"></script>
         <script src="data/ILNoFurtherRemediation_17.js"></script>
@@ -294,635 +323,101 @@
         <script src="data/EPABrownfields_24.js"></script>
         <script src="data/RCRAHazardousWaste_25.js"></script>
         <script>
+        
+        
+        
+        
+        
+//************************************************************	
 
+// Current Version Part 2 - Start Copy Here
+// Contains default map attributes, and base maps
+
+//************************************************************	
+        
+        
+        
+        
             	  
 		var map = L.map('map', {
             zoomControl:true,
 			defaultExtentControl: true,			
-			maxZoom:28,
+			maxZoom:15,
 			minZoom:10,
 			//zoomAnimation: false
-			zoomAnimationThreshold: 2
+			zoomAnimationThreshold: 1
         }).fitBounds([[41.18050458690117,-88.1686722914467],[41.9612337442125114,-86.36692180925673]]);
         var hash = new L.Hash(map);
-        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         // Basic map settings, attribution control
-		
+        
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
             //map.setMaxBounds(map.getBounds());
         }
-
-        var layer_BaseMap2_0 = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        
+        // Base Maps
+        map.createPane('pane_BaseMap1_1');
+        map.getPane('pane_BaseMap1_1').style.zIndex = 400;
+        var layer_BaseMap1_1 = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            pane: 'pane_BaseMap1_1',
             opacity: 1.0,
             attribution: '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors, CC-BY-SA</a>',
-        });
-        layer_BaseMap2_0;
-        map.addLayer(layer_BaseMap2_0);
-        var layer_BaseMap1_1 = L.tileLayer('http://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
-            opacity: 1.0,
-            attribution: '<a href="https://cartodb.com/basemaps/">Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
         });
         layer_BaseMap1_1;
         map.addLayer(layer_BaseMap1_1);
-		
+        
+        map.createPane('pane_BaseMap2_0');
+        map.getPane('pane_BaseMap2_0').style.zIndex = 401;
+        var layer_BaseMap2_0 = L.tileLayer('http://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+            pane: 'pane_BaseMap2_0',
+            opacity: 1.0,
+            attribution: '<a href="https://cartodb.com/basemaps/">Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_BaseMap2_0;
+        //map.addLayer(layer_BaseMap2_0);
+
+
         
 		
 		
 		
 //************************************************************	
 
-// Current Version Part 1 - End Copy Here
+// Current Version Part 2 - End Copy Here
 	
-// Start of TopoJSON layers - must be handled individually by changing 2 key lines
-		// From: var layer_USGSProtectedAreas_2 = new L.geoJson(json_USGSProtectedAreas_2, {
-		// To: var layer_USGSProtectedAreas_2 = new L.geoJson(null, 
-		// After var layer_USGSProtectedAreas_2 is defined, add: 
-		//      omnivore.topojson('data/USGSProtectedAreas_2.json', null, layer_USGSProtectedAreas_2);
+// Start of TopoJSON layers - must be handled individually by changing 3 key lines
+		// From: var layer_SocialVulnerabilityIndex_2 = new L.geoJson(json_SocialVulnerabilityIndex_2, {
+		// To: var layer_SocialVulnerabilityIndex_2 = new L.geoJson(null,
+        // From: dataVar: 'json_SocialVulnerabilityIndex_2',
+        // To: //dataVar: 'json_SocialVulnerabilityIndex_2',
+		// After var layer_SocialVulnerabilityIndex_2 is defined, add: 
+		//      omnivore.topojson('data/SocialVulnerabilityIndex_2.json', null, layer_SocialVulnerabilityIndex_2);
+
+// Start of Tile Layers - must be handled individually by replacing 
 
 //************************************************************	
 
 		
 		
 		
-		
-		function pop_USGSProtectedAreas_2(feature, layer) {
+		        
+        function pop_SocialVulnerabilityIndex_2(feature, layer) {
         }
 
-        function style_USGSProtectedAreas_2_0() {
-            return {
-                pane: 'pane_USGSProtectedAreas_2',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(57,109,91,1.0)',
-            }
-        }
-        map.createPane('pane_USGSProtectedAreas_2');
-        map.getPane('pane_USGSProtectedAreas_2').style.zIndex = 402;
-        map.getPane('pane_USGSProtectedAreas_2').style['mix-blend-mode'] = 'normal';
-        var layer_USGSProtectedAreas_2 = new L.geoJson(null, {
-            attribution: '',
-            pane: 'pane_USGSProtectedAreas_2',
-            onEachFeature: pop_USGSProtectedAreas_2,
-            style: style_USGSProtectedAreas_2_0,
-        });
-        omnivore.topojson('data/USGSProtectedAreas_2.json', null, layer_USGSProtectedAreas_2)
-		bounds_group.addLayer(layer_USGSProtectedAreas_2);
-        function pop_Wetlands_3(feature, layer) {
-        }
-
-        function style_Wetlands_3_0() {
-            return {
-                pane: 'pane_Wetlands_3',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(31,161,100,1.0)',
-            }
-        }
-        map.createPane('pane_Wetlands_3');
-        map.getPane('pane_Wetlands_3').style.zIndex = 403;
-        map.getPane('pane_Wetlands_3').style['mix-blend-mode'] = 'normal';
-		var layer_Wetlands_3 = new L.geoJSON(null, {
-            attribution: '',
-            pane: 'pane_Wetlands_3',
-            onEachFeature: pop_Wetlands_3,
-            style: style_Wetlands_3_0,
-        });
-        omnivore.topojson('data/Wetlands_3.json', null, layer_Wetlands_3)
-        bounds_group.addLayer(layer_Wetlands_3);
-        function pop_500YearFloodPlain_4(feature, layer) {
-        }
-
-        function style_500YearFloodPlain_4_0() {
-            return {
-                pane: 'pane_500YearFloodPlain_4',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(26,84,117,1.0)',
-            }
-        }
-        map.createPane('pane_500YearFloodPlain_4');
-        map.getPane('pane_500YearFloodPlain_4').style.zIndex = 404;
-        map.getPane('pane_500YearFloodPlain_4').style['mix-blend-mode'] = 'normal';
-        var layer_500YearFloodPlain_4 = new L.geoJSON(null, {
-            attribution: '',
-            pane: 'pane_500YearFloodPlain_4',
-            onEachFeature: pop_500YearFloodPlain_4,
-            style: style_500YearFloodPlain_4_0,
-        });
-        omnivore.topojson('data/500YearFloodPlain_4.json', null, layer_500YearFloodPlain_4)
-		bounds_group.addLayer(layer_500YearFloodPlain_4);
-        function pop_100YearFloodPlain_5(feature, layer) {
-        }
-
-        function style_100YearFloodPlain_5_0() {
-            return {
-                pane: 'pane_100YearFloodPlain_5',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(255,96,57,1.0)',
-            }
-        }
-        map.createPane('pane_100YearFloodPlain_5');
-        map.getPane('pane_100YearFloodPlain_5').style.zIndex = 405;
-        map.getPane('pane_100YearFloodPlain_5').style['mix-blend-mode'] = 'normal';
-        var layer_100YearFloodPlain_5 = new L.geoJSON(null, {
-            attribution: '',
-            pane: 'pane_100YearFloodPlain_5',
-            onEachFeature: pop_100YearFloodPlain_5,
-            style: style_100YearFloodPlain_5_0,
-        });
-        omnivore.topojson('data/100YearFloodPlain_5.json', null, layer_100YearFloodPlain_5)
-		bounds_group.addLayer(layer_100YearFloodPlain_5);
-        function pop_MinimalorReducedFloodHazard_6(feature, layer) {
-        }
-
-        function style_MinimalorReducedFloodHazard_6_0() {
-            return {
-                pane: 'pane_MinimalorReducedFloodHazard_6',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(222,245,200,1.0)',
-            }
-        }
-        map.createPane('pane_MinimalorReducedFloodHazard_6');
-        map.getPane('pane_MinimalorReducedFloodHazard_6').style.zIndex = 406;
-        map.getPane('pane_MinimalorReducedFloodHazard_6').style['mix-blend-mode'] = 'normal';
-        var layer_MinimalorReducedFloodHazard_6 = new L.geoJSON(null, {
-            attribution: '',
-            pane: 'pane_MinimalorReducedFloodHazard_6',
-            onEachFeature: pop_MinimalorReducedFloodHazard_6,
-            style: style_MinimalorReducedFloodHazard_6_0,
-        });
-        omnivore.topojson('data/MinimalorReducedFloodHazard_6.json', null, layer_MinimalorReducedFloodHazard_6)
-		bounds_group.addLayer(layer_MinimalorReducedFloodHazard_6);
-        function pop_LandUse_7(feature, layer) {
-            var popupContent = '<table>\
-                    <tr>\
-                        <th scope="row">NewJoin_Fu</th>\
-                        <td>' + (feature.properties['NewJoin_Fu'] !== null ? Autolinker.link(String(feature.properties['NewJoin_Fu'])) : '') + '</td>\
-                    </tr>\
-                </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
-        }
-        function style_LandUse_7_0(feature) {
-            var context = {
-                feature: feature,
-                variables: {}
-            };
-            // Start of if blocks and style check logic
-            if (LandUse_7rule0_eval_expression(context)) {
-                  return {
-                pane: 'pane_LandUse_7',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(94,255,99,1.0)',
-            };
-                }
-                else if (LandUse_7rule1_eval_expression(context)) {
-                  return {
-                pane: 'pane_LandUse_7',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(251,154,153,1.0)',
-            };
-                }
-                else if (LandUse_7rule2_eval_expression(context)) {
-                  return {
-                pane: 'pane_LandUse_7',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(117,57,5,1.0)',
-            };
-                }
-                else if (LandUse_7rule3_eval_expression(context)) {
-                  return {
-                pane: 'pane_LandUse_7',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(31,120,180,1.0)',
-            };
-                }
-                else if (LandUse_7rule4_eval_expression(context)) {
-                  return {
-                pane: 'pane_LandUse_7',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(178,223,138,1.0)',
-            };
-                }
-                else if (LandUse_7rule5_eval_expression(context)) {
-                  return {
-                pane: 'pane_LandUse_7',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(249,242,29,1.0)',
-            };
-                }
-                else if (LandUse_7rule6_eval_expression(context)) {
-                  return {
-                pane: 'pane_LandUse_7',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(28,159,215,1.0)',
-            };
-                }
-                else if (LandUse_7rule7_eval_expression(context)) {
-                  return {
-                pane: 'pane_LandUse_7',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(94,255,99,1.0)',
-            };
-                }
-                else if (LandUse_7rule8_eval_expression(context)) {
-                  return {
-                pane: 'pane_LandUse_7',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(156,156,156,1.0)',
-            };
-                }
-            else {
-                return {fill: false, stroke: false};
-            }
-        }
-        map.createPane('pane_LandUse_7');
-        map.getPane('pane_LandUse_7').style.zIndex = 407;
-        map.getPane('pane_LandUse_7').style['mix-blend-mode'] = 'normal';     
-        var layer_LandUse_7 = new L.geoJSON(null, {
-            attribution: '',
-            pane: 'pane_LandUse_7',
-            onEachFeature: pop_LandUse_7,
-            style: style_LandUse_7_0,
-        });
-        omnivore.topojson('data/LandUse_7.json', null, layer_LandUse_7)
-		bounds_group.addLayer(layer_LandUse_7);
-        function pop_CookCountyZoning_8(feature, layer) {
-        }
-
-        function style_CookCountyZoning_8_0(feature) {
-            switch(String(feature.properties['q2wHide_Zoning'])) {
-                case 'Agriculture':
-                    return {
-                pane: 'pane_CookCountyZoning_8',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(74,233,231,1.0)',
-            }
-                    break;
-                case 'Business or Commercial':
-                    return {
-                pane: 'pane_CookCountyZoning_8',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(236,77,41,1.0)',
-            }
-                    break;
-                case 'Central Business District':
-                    return {
-                pane: 'pane_CookCountyZoning_8',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(206,136,51,1.0)',
-            }
-                    break;
-                case 'Local Planning':
-                    return {
-                pane: 'pane_CookCountyZoning_8',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(73,148,239,1.0)',
-            }
-                    break;
-                case 'Manufacturing':
-                    return {
-                pane: 'pane_CookCountyZoning_8',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(159,56,203,1.0)',
-            }
-                    break;
-                case 'No Zoning':
-                    return {
-                pane: 'pane_CookCountyZoning_8',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(42,223,26,1.0)',
-            }
-                    break;
-                case 'Open Space':
-                    return {
-                pane: 'pane_CookCountyZoning_8',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(33,173,103,1.0)',
-            }
-                    break;
-                case 'Residential':
-                    return {
-                pane: 'pane_CookCountyZoning_8',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(231,240,45,1.0)',
-            }
-                    break;
-                case 'Transportation':
-                    return {
-                pane: 'pane_CookCountyZoning_8',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(84,47,163,1.0)',
-            }
-                    break;
-            }
-        }
-        map.createPane('pane_CookCountyZoning_8');
-        map.getPane('pane_CookCountyZoning_8').style.zIndex = 408;
-        map.getPane('pane_CookCountyZoning_8').style['mix-blend-mode'] = 'normal';	
-        var layer_CookCountyZoning_8 = new L.geoJSON(null, {
-            attribution: '',
-            pane: 'pane_CookCountyZoning_8',
-            onEachFeature: pop_CookCountyZoning_8,
-            style: style_CookCountyZoning_8_0,
-        });
-        omnivore.topojson('data/CookCountyZoning_8.json', null, layer_CookCountyZoning_8)
-        bounds_group.addLayer(layer_CookCountyZoning_8);		
-        function pop_INZoning_9(feature, layer) {
-        }
-
-        function style_INZoning_9_0(feature) {
-            switch(String(feature.properties['q2wHide_Zoning'])) {
-                case 'Agriculture':
-                    return {
-                pane: 'pane_INZoning_9',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(74,233,231,1.0)',
-            }
-                    break;
-                case 'Business or Commercial':
-                    return {
-                pane: 'pane_INZoning_9',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(236,77,41,1.0)',
-            }
-                    break;
-                case 'Central Business District':
-                    return {
-                pane: 'pane_INZoning_9',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(206,136,51,1.0)',
-            }
-                    break;
-                case 'Local Planning':
-                    return {
-                pane: 'pane_INZoning_9',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(73,148,239,1.0)',
-            }
-                    break;
-                case 'Manufacturing':
-                    return {
-                pane: 'pane_INZoning_9',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(159,56,203,1.0)',
-            }
-                    break;
-                case 'Open Space':
-                    return {
-                pane: 'pane_INZoning_9',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(33,173,103,1.0)',
-            }
-                    break;
-                case 'Residential':
-                    return {
-                pane: 'pane_INZoning_9',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(231,240,45,1.0)',
-            }
-                    break;
-                case 'Transportation':
-                    return {
-                pane: 'pane_INZoning_9',
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(84,47,163,1.0)',
-            }
-                    break;
-            }
-        }
-        map.createPane('pane_INZoning_9');
-        map.getPane('pane_INZoning_9').style.zIndex = 409;
-        map.getPane('pane_INZoning_9').style['mix-blend-mode'] = 'normal';
-        var layer_INZoning_9 = new L.geoJSON(null, {
-            attribution: '',
-            pane: 'pane_INZoning_9',
-            onEachFeature: pop_INZoning_9,
-            style: style_INZoning_9_0,
-        });
-        omnivore.topojson('data/INZoning_9.json', null, layer_INZoning_9)
-        bounds_group.addLayer(layer_INZoning_9);
-        function pop_SocialVulnerabilityIndex_10(feature, layer) {
-        }
-
-        function style_SocialVulnerabilityIndex_10_0(feature) {
+        function style_SocialVulnerabilityIndex_2_0(feature) {
             if (feature.properties['q2wHide_SVI'] >= 0.013000 && feature.properties['q2wHide_SVI'] <= 0.259750 ) {
                 return {
-                pane: 'pane_SocialVulnerabilityIndex_10',
+                pane: 'pane_SocialVulnerabilityIndex_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -932,11 +427,12 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(241,238,246,1.0)',
+                interactive: true,
             }
             }
             if (feature.properties['q2wHide_SVI'] >= 0.259750 && feature.properties['q2wHide_SVI'] <= 0.506500 ) {
                 return {
-                pane: 'pane_SocialVulnerabilityIndex_10',
+                pane: 'pane_SocialVulnerabilityIndex_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -946,11 +442,12 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(218,154,203,1.0)',
+                interactive: true,
             }
             }
             if (feature.properties['q2wHide_SVI'] >= 0.506500 && feature.properties['q2wHide_SVI'] <= 0.753250 ) {
                 return {
-                pane: 'pane_SocialVulnerabilityIndex_10',
+                pane: 'pane_SocialVulnerabilityIndex_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -960,11 +457,12 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(222,52,138,1.0)',
+                interactive: true,
             }
             }
             if (feature.properties['q2wHide_SVI'] >= 0.753250 && feature.properties['q2wHide_SVI'] <= 1.000000 ) {
                 return {
-                pane: 'pane_SocialVulnerabilityIndex_10',
+                pane: 'pane_SocialVulnerabilityIndex_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -974,26 +472,30 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(152,0,67,1.0)',
+                interactive: true,
             }
             }
         }
-        map.createPane('pane_SocialVulnerabilityIndex_10');
-        map.getPane('pane_SocialVulnerabilityIndex_10').style.zIndex = 410;
-        map.getPane('pane_SocialVulnerabilityIndex_10').style['mix-blend-mode'] = 'normal';
-        var layer_SocialVulnerabilityIndex_10 = new L.geoJSON(null, {
+        map.createPane('pane_SocialVulnerabilityIndex_2');
+        map.getPane('pane_SocialVulnerabilityIndex_2').style.zIndex = 402;
+        map.getPane('pane_SocialVulnerabilityIndex_2').style['mix-blend-mode'] = 'normal';
+        var layer_SocialVulnerabilityIndex_2 = new L.geoJSON(null, {
             attribution: '',
-            pane: 'pane_SocialVulnerabilityIndex_10',
-            onEachFeature: pop_SocialVulnerabilityIndex_10,
-            style: style_SocialVulnerabilityIndex_10_0,
+            interactive: true,
+            //dataVar: 'json_SocialVulnerabilityIndex_2',
+            layerName: 'layer_SocialVulnerabilityIndex_2',
+            pane: 'pane_SocialVulnerabilityIndex_2',
+            onEachFeature: pop_SocialVulnerabilityIndex_2,
+            style: style_SocialVulnerabilityIndex_2_0,
         });
-        omnivore.topojson('data/SocialVulnerabilityIndex_10.json', null, layer_SocialVulnerabilityIndex_10)
-        bounds_group.addLayer(layer_SocialVulnerabilityIndex_10);
-        function pop_NewMarketTaxCreditsNMTC_11(feature, layer) {
+        omnivore.topojson('data/SocialVulnerabilityIndex_2.json', null, layer_SocialVulnerabilityIndex_2)
+        bounds_group.addLayer(layer_SocialVulnerabilityIndex_2);
+        function pop_MinimalorReducedFloodHazard_3(feature, layer) {
         }
 
-        function style_NewMarketTaxCreditsNMTC_11_0() {
+        function style_MinimalorReducedFloodHazard_3_0() {
             return {
-                pane: 'pane_NewMarketTaxCreditsNMTC_11',
+                pane: 'pane_MinimalorReducedFloodHazard_3',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.0)',
                 dashArray: '',
@@ -1002,112 +504,422 @@
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(85,28,210,0.35294117647058826)',
+                fillColor: 'rgba(222,245,200,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_MinimalorReducedFloodHazard_3');
+        map.getPane('pane_MinimalorReducedFloodHazard_3').style.zIndex = 403;
+        map.getPane('pane_MinimalorReducedFloodHazard_3').style['mix-blend-mode'] = 'normal';
+        var layer_MinimalorReducedFloodHazard_3 = new L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            //dataVar: 'json_MinimalorReducedFloodHazard_3',
+            layerName: 'layer_MinimalorReducedFloodHazard_3',
+            pane: 'pane_MinimalorReducedFloodHazard_3',
+            onEachFeature: pop_MinimalorReducedFloodHazard_3,
+            style: style_MinimalorReducedFloodHazard_3_0,
+        });
+        omnivore.topojson('data/MinimalorReducedFloodHazard_3.json', null, layer_MinimalorReducedFloodHazard_3)
+        bounds_group.addLayer(layer_MinimalorReducedFloodHazard_3);
+        function pop_100YearFloodPlain_4(feature, layer) {
+        }
+
+        function style_100YearFloodPlain_4_0() {
+            return {
+                pane: 'pane_100YearFloodPlain_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,96,57,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_100YearFloodPlain_4');
+        map.getPane('pane_100YearFloodPlain_4').style.zIndex = 404;
+        map.getPane('pane_100YearFloodPlain_4').style['mix-blend-mode'] = 'normal';
+        var layer_100YearFloodPlain_4 = new L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            //dataVar: 'json_100YearFloodPlain_4',
+            layerName: 'layer_100YearFloodPlain_4',
+            pane: 'pane_100YearFloodPlain_4',
+            onEachFeature: pop_100YearFloodPlain_4,
+            style: style_100YearFloodPlain_4_0,
+        });
+        omnivore.topojson('data/100YearFloodPlain_4.json', null, layer_100YearFloodPlain_4)
+        bounds_group.addLayer(layer_100YearFloodPlain_4);
+        function pop_500YearFloodPlain_5(feature, layer) {
+        }
+
+        function style_500YearFloodPlain_5_0() {
+            return {
+                pane: 'pane_500YearFloodPlain_5',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(26,84,117,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_500YearFloodPlain_5');
+        map.getPane('pane_500YearFloodPlain_5').style.zIndex = 405;
+        map.getPane('pane_500YearFloodPlain_5').style['mix-blend-mode'] = 'normal';
+        var layer_500YearFloodPlain_5 = new L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            //dataVar: 'json_500YearFloodPlain_5',
+            layerName: 'layer_500YearFloodPlain_5',
+            pane: 'pane_500YearFloodPlain_5',
+            onEachFeature: pop_500YearFloodPlain_5,
+            style: style_500YearFloodPlain_5_0,
+        });
+        omnivore.topojson('data/500YearFloodPlain_5.json', null, layer_500YearFloodPlain_5)
+        bounds_group.addLayer(layer_500YearFloodPlain_5);
+        function pop_Wetlands_6(feature, layer) {
+        }
+
+        function style_Wetlands_6_0() {
+            return {
+                pane: 'pane_Wetlands_6',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(31,161,100,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Wetlands_6');
+        map.getPane('pane_Wetlands_6').style.zIndex = 406;
+        map.getPane('pane_Wetlands_6').style['mix-blend-mode'] = 'normal';
+        var layer_Wetlands_6 = new L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            //dataVar: 'json_Wetlands_6',
+            layerName: 'layer_Wetlands_6',
+            pane: 'pane_Wetlands_6',
+            onEachFeature: pop_Wetlands_6,
+            style: style_Wetlands_6_0,
+        });
+        omnivore.topojson('data/Wetlands_6.json', null, layer_Wetlands_6)
+        bounds_group.addLayer(layer_Wetlands_6);
+        function pop_USGSProtectedAreas_7(feature, layer) {
+        }
+
+        function style_USGSProtectedAreas_7_0() {
+            return {
+                pane: 'pane_USGSProtectedAreas_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(57,109,91,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_USGSProtectedAreas_7');
+        map.getPane('pane_USGSProtectedAreas_7').style.zIndex = 407;
+        map.getPane('pane_USGSProtectedAreas_7').style['mix-blend-mode'] = 'normal';
+        var layer_USGSProtectedAreas_7 = new L.geoJson(null, {
+            attribution: '',
+            interactive: true,
+            //dataVar: 'json_USGSProtectedAreas_7',
+            layerName: 'layer_USGSProtectedAreas_7',
+            pane: 'pane_USGSProtectedAreas_7',
+            onEachFeature: pop_USGSProtectedAreas_7,
+            style: style_USGSProtectedAreas_7_0,
+        });
+        omnivore.topojson('data/USGSProtectedAreas_7.json', null, layer_USGSProtectedAreas_7)
+        bounds_group.addLayer(layer_USGSProtectedAreas_7);
+
+
+
+
+
+//************************************************************			
+		
+// Start of Tile layers
+		
+//************************************************************	
+
+
+
+
+        // Land Use
+        map.createPane('pane_LandUse_8');
+        map.getPane('pane_LandUse_8').style.zIndex = 408;
+        var layer_LandUse_8 = L.tileLayer('https://raw.githubusercontent.com/calumetcollaborative/tile_server/master/CRMT/LandUse/{z}/{x}/{y}.png', {
+        minZoom: 10,
+        maxZoom: 15,
+        pane: 'pane_LandUse_8',
+        bounds: [[40.88716954154601,-87.8407282955942],[42.156929459638185,-86.4432228342273]],
+        crossOrigin: "",
+        tms: false,
+        attribution: 'Generated by TilesXYZ'
+        });
+        bounds_group.addLayer(layer_LandUse_8);
+        
+        // Cook County Zoning        
+        map.createPane('pane_CookCountyZoning_9');
+        map.getPane('pane_CookCountyZoning_9').style.zIndex = 409;
+        var layer_CookCountyZoning_9 = L.tileLayer('https://raw.githubusercontent.com/calumetcollaborative/tile_server/master/CRMT/CookCountyZoning/{z}/{x}/{y}.png', {
+        minZoom: 10,
+        maxZoom: 15,
+        pane: 'pane_CookCountyZoning_9',
+        bounds: [[40.88716954154601,-87.8407282955942],[42.156929459638185,-86.4432228342273]],
+        crossOrigin: "",
+        tms: false,
+        attribution: 'Generated by TilesXYZ'
+        });
+        bounds_group.addLayer(layer_CookCountyZoning_9);
+        
+        // Indiana Zoning
+        map.createPane('pane_INZoning_10');
+        map.getPane('pane_INZoning_10').style.zIndex = 410;
+        var layer_INZoning_10 = L.tileLayer('https://raw.githubusercontent.com/calumetcollaborative/tile_server/master/CRMT/INZoning/{z}/{x}/{y}.png', {
+        minZoom: 10,
+        maxZoom: 15,
+        pane: 'pane_INZoning_10',
+        bounds: [[40.88716954154601,-87.8407282955942],[42.156929459638185,-86.4432228342273]],
+        crossOrigin: "",
+        tms: false,
+        attribution: 'Generated by TilesXYZ'
+        });
+        bounds_group.addLayer(layer_INZoning_10);
+        
+        
+        
+        
+        
+ //************************************************************			
+		
+// End of Tile layers
+		
+//************************************************************	
+        
+        
+        
+        
+        
+        function pop_NewMarketTaxCreditsNMTC_11(feature, layer) {
+        }
+
+        var pattern_NewMarketTaxCreditsNMTC_11_0 = new L.StripePattern({
+            weight: 0.3,
+            spaceWeight: 2.0,
+            color: '#551cd2',
+            opacity: 1.0,
+            spaceOpacity: 0,
+            angle: 315
+        });
+        pattern_NewMarketTaxCreditsNMTC_11_0.addTo(map);
+        function style_NewMarketTaxCreditsNMTC_11_0() {
+            return {
+                pane: 'pane_NewMarketTaxCreditsNMTC_11',
+                stroke: false,
+                fillOpacity: 1,
+                fillPattern: pattern_NewMarketTaxCreditsNMTC_11_0,
+                interactive: true,
+            }
+        }
+        function style_NewMarketTaxCreditsNMTC_11_1() {
+            return {
+                pane: 'pane_NewMarketTaxCreditsNMTC_11',
+                opacity: 1,
+                color: 'rgba(85,28,210,0.35294117647058826)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
             }
         }
         map.createPane('pane_NewMarketTaxCreditsNMTC_11');
         map.getPane('pane_NewMarketTaxCreditsNMTC_11').style.zIndex = 411;
         map.getPane('pane_NewMarketTaxCreditsNMTC_11').style['mix-blend-mode'] = 'normal';
-        var layer_NewMarketTaxCreditsNMTC_11 = new L.geoJSON(null, {
+        var layer_NewMarketTaxCreditsNMTC_11 = new L.geoJson.multiStyle(null, {
             attribution: '',
+            interactive: true,
+            //dataVar: 'json_NewMarketTaxCreditsNMTC_11',
+            layerName: 'layer_NewMarketTaxCreditsNMTC_11',
             pane: 'pane_NewMarketTaxCreditsNMTC_11',
             onEachFeature: pop_NewMarketTaxCreditsNMTC_11,
-            style: style_NewMarketTaxCreditsNMTC_11_0,
+            styles: [style_NewMarketTaxCreditsNMTC_11_0,style_NewMarketTaxCreditsNMTC_11_1,]
         });
         omnivore.topojson('data/NewMarketTaxCreditsNMTC_11.json', null, layer_NewMarketTaxCreditsNMTC_11)
-		bounds_group.addLayer(layer_NewMarketTaxCreditsNMTC_11);
+        bounds_group.addLayer(layer_NewMarketTaxCreditsNMTC_11);
         function pop_HUBZones_12(feature, layer) {
         }
 
+        var pattern_HUBZones_12_0 = new L.StripePattern({
+            weight: 0.3,
+            spaceWeight: 2.0,
+            color: '#8de5c2',
+            opacity: 1.0,
+            spaceOpacity: 0,
+            angle: 225
+        });
+        pattern_HUBZones_12_0.addTo(map);
         function style_HUBZones_12_0() {
             return {
                 pane: 'pane_HUBZones_12',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
+                stroke: false,
                 fillOpacity: 1,
-                fillColor: 'rgba(141,229,194,0.5176470588235295)',
+                fillPattern: pattern_HUBZones_12_0,
+                interactive: true,
+            }
+        }
+        function style_HUBZones_12_1() {
+            return {
+                pane: 'pane_HUBZones_12',
+                opacity: 1,
+                color: 'rgba(141,229,194,0.5176470588235295)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
             }
         }
         map.createPane('pane_HUBZones_12');
         map.getPane('pane_HUBZones_12').style.zIndex = 412;
         map.getPane('pane_HUBZones_12').style['mix-blend-mode'] = 'normal';
-        var layer_HUBZones_12 = new L.geoJSON(null, {
+        var layer_HUBZones_12 = new L.geoJson.multiStyle(null, {
             attribution: '',
+            interactive: true,
+            //dataVar: 'json_HUBZones_12',
+            layerName: 'layer_HUBZones_12',
             pane: 'pane_HUBZones_12',
             onEachFeature: pop_HUBZones_12,
-            style: style_HUBZones_12_0,
+            styles: [style_HUBZones_12_0,style_HUBZones_12_1,]
         });
         omnivore.topojson('data/HUBZones_12.json', null, layer_HUBZones_12)
-		bounds_group.addLayer(layer_HUBZones_12);
+        bounds_group.addLayer(layer_HUBZones_12);
         function pop_TaxIncrementFinancingTIF_13(feature, layer) {
         }
 
+        var pattern_TaxIncrementFinancingTIF_13_0 = new L.StripePattern({
+            weight: 0.5,
+            spaceWeight: 2.0,
+            color: '#12f0d3',
+            opacity: 1.0,
+            spaceOpacity: 0,
+            angle: 270
+        });
+        pattern_TaxIncrementFinancingTIF_13_0.addTo(map);
         function style_TaxIncrementFinancingTIF_13_0() {
             return {
                 pane: 'pane_TaxIncrementFinancingTIF_13',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
+                stroke: false,
                 fillOpacity: 1,
-                fillColor: 'rgba(18,240,211,1.0)',
+                fillPattern: pattern_TaxIncrementFinancingTIF_13_0,
+                interactive: true,
+            }
+        }
+        function style_TaxIncrementFinancingTIF_13_1() {
+            return {
+                pane: 'pane_TaxIncrementFinancingTIF_13',
+                opacity: 1,
+                color: 'rgba(18,240,211,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
             }
         }
         map.createPane('pane_TaxIncrementFinancingTIF_13');
         map.getPane('pane_TaxIncrementFinancingTIF_13').style.zIndex = 413;
         map.getPane('pane_TaxIncrementFinancingTIF_13').style['mix-blend-mode'] = 'normal';
-        var layer_TaxIncrementFinancingTIF_13 = new L.geoJSON(null, {
+        var layer_TaxIncrementFinancingTIF_13 = new L.geoJson.multiStyle(null, {
             attribution: '',
+            interactive: true,
+            //dataVar: 'json_TaxIncrementFinancingTIF_13',
+            layerName: 'layer_TaxIncrementFinancingTIF_13',
             pane: 'pane_TaxIncrementFinancingTIF_13',
             onEachFeature: pop_TaxIncrementFinancingTIF_13,
-            style: style_TaxIncrementFinancingTIF_13_0,
+            styles: [style_TaxIncrementFinancingTIF_13_0,style_TaxIncrementFinancingTIF_13_1,]
         });
         omnivore.topojson('data/TaxIncrementFinancingTIF_13.json', null, layer_TaxIncrementFinancingTIF_13)
         bounds_group.addLayer(layer_TaxIncrementFinancingTIF_13);
         function pop_OpportunityZones_14(feature, layer) {
         }
 
+        var pattern_OpportunityZones_14_0 = new L.StripePattern({
+            weight: 0.3,
+            spaceWeight: 2.0,
+            color: '#e8ae0e',
+            opacity: 1.0,
+            spaceOpacity: 0,
+            angle: 315
+        });
+        pattern_OpportunityZones_14_0.addTo(map);
         function style_OpportunityZones_14_0() {
             return {
                 pane: 'pane_OpportunityZones_14',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
+                stroke: false,
                 fillOpacity: 1,
-                fillColor: 'rgba(173,17,190,0.5058823529411764)',
+                fillPattern: pattern_OpportunityZones_14_0,
+                interactive: true,
+            }
+        }
+        function style_OpportunityZones_14_1() {
+            return {
+                pane: 'pane_OpportunityZones_14',
+                opacity: 1,
+                color: 'rgba(232,174,14,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
             }
         }
         map.createPane('pane_OpportunityZones_14');
         map.getPane('pane_OpportunityZones_14').style.zIndex = 414;
         map.getPane('pane_OpportunityZones_14').style['mix-blend-mode'] = 'normal';
-        var layer_OpportunityZones_14 = new L.geoJSON(null, {
+        var layer_OpportunityZones_14 = new L.geoJson.multiStyle(null, {
             attribution: '',
+            interactive: true,
+            //dataVar: 'json_OpportunityZones_14',
+            layerName: 'layer_OpportunityZones_14',
             pane: 'pane_OpportunityZones_14',
             onEachFeature: pop_OpportunityZones_14,
-            style: style_OpportunityZones_14_0,
+            styles: [style_OpportunityZones_14_0,style_OpportunityZones_14_1,]
         });
         omnivore.topojson('data/OpportunityZones_14.json', null, layer_OpportunityZones_14)
         bounds_group.addLayer(layer_OpportunityZones_14);
-		
+        		
 		
 
 
 		
 //************************************************************			
 		
-// End of TopoJSON layers
+// End of TopoJSON and Tile layers
 		
 //************************************************************			
 
@@ -1119,11 +931,11 @@
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">Site ID</th>\
-                        <td>' + (feature.properties['Site_ID'] !== null ? Autolinker.link(String(feature.properties['Site_ID'])) : '') + '</td>\
+                        <td>' + (feature.properties['Site_ID'] !== null ? autolinker.link(feature.properties['Site_ID'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Site</th>\
-                        <td>' + (feature.properties['Site'] !== null ? Autolinker.link(String(feature.properties['Site'])) : '') + '</td>\
+                        <td>' + (feature.properties['Site'] !== null ? autolinker.link(feature.properties['Site'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -1142,6 +954,7 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(255,158,23,1.0)',
+                interactive: true,
             }
         }
         map.createPane('pane_ILStateResponseActionSites_15');
@@ -1149,6 +962,9 @@
         map.getPane('pane_ILStateResponseActionSites_15').style['mix-blend-mode'] = 'normal';
         var layer_ILStateResponseActionSites_15 = new L.geoJson(json_ILStateResponseActionSites_15, {
             attribution: '',
+            interactive: true,
+            dataVar: 'json_ILStateResponseActionSites_15',
+            layerName: 'layer_ILStateResponseActionSites_15',
             pane: 'pane_ILStateResponseActionSites_15',
             onEachFeature: pop_ILStateResponseActionSites_15,
             pointToLayer: function (feature, latlng) {
@@ -1165,7 +981,7 @@
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">Location</th>\
-                        <td>' + (feature.properties['Location'] !== null ? Autolinker.link(String(feature.properties['Location'])) : '') + '</td>\
+                        <td>' + (feature.properties['Location'] !== null ? autolinker.link(feature.properties['Location'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -1184,6 +1000,7 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(114,155,111,1.0)',
+                interactive: true,
             }
         }
         map.createPane('pane_ILLeakingUndergroundStorage_16');
@@ -1191,6 +1008,9 @@
         map.getPane('pane_ILLeakingUndergroundStorage_16').style['mix-blend-mode'] = 'normal';
         var layer_ILLeakingUndergroundStorage_16 = new L.geoJson(json_ILLeakingUndergroundStorage_16, {
             attribution: '',
+            interactive: true,
+            dataVar: 'json_ILLeakingUndergroundStorage_16',
+            layerName: 'layer_ILLeakingUndergroundStorage_16',
             pane: 'pane_ILLeakingUndergroundStorage_16',
             onEachFeature: pop_ILLeakingUndergroundStorage_16,
             pointToLayer: function (feature, latlng) {
@@ -1207,11 +1027,11 @@
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">IL EPA ID</th>\
-                        <td>' + (feature.properties['Iepaid'] !== null ? Autolinker.link(String(feature.properties['Iepaid'])) : '') + '</td>\
+                        <td>' + (feature.properties['Iepaid'] !== null ? autolinker.link(feature.properties['Iepaid'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Site Name</th>\
-                        <td>' + (feature.properties['NfrSiteNam'] !== null ? Autolinker.link(String(feature.properties['NfrSiteNam'])) : '') + '</td>\
+                        <td>' + (feature.properties['NfrSiteNam'] !== null ? autolinker.link(feature.properties['NfrSiteNam'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -1230,6 +1050,7 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(232,113,141,1.0)',
+                interactive: true,
             }
         }
         map.createPane('pane_ILNoFurtherRemediation_17');
@@ -1237,6 +1058,9 @@
         map.getPane('pane_ILNoFurtherRemediation_17').style['mix-blend-mode'] = 'normal';
         var layer_ILNoFurtherRemediation_17 = new L.geoJson(json_ILNoFurtherRemediation_17, {
             attribution: '',
+            interactive: true,
+            dataVar: 'json_ILNoFurtherRemediation_17',
+            layerName: 'layer_ILNoFurtherRemediation_17',
             pane: 'pane_ILNoFurtherRemediation_17',
             onEachFeature: pop_ILNoFurtherRemediation_17,
             pointToLayer: function (feature, latlng) {
@@ -1253,11 +1077,11 @@
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">IN EPA ID</th>\
-                        <td>' + (feature.properties['Iepaid'] !== null ? Autolinker.link(String(feature.properties['Iepaid'])) : '') + '</td>\
+                        <td>' + (feature.properties['Iepaid'] !== null ? autolinker.link(feature.properties['Iepaid'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Site Name</th>\
-                        <td>' + (feature.properties['NfrSiteNam'] !== null ? Autolinker.link(String(feature.properties['NfrSiteNam'])) : '') + '</td>\
+                        <td>' + (feature.properties['NfrSiteNam'] !== null ? autolinker.link(feature.properties['NfrSiteNam'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -1276,6 +1100,7 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(152,125,183,1.0)',
+                interactive: true,
             }
         }
         map.createPane('pane_INNoFurtherRemediation_18');
@@ -1283,6 +1108,9 @@
         map.getPane('pane_INNoFurtherRemediation_18').style['mix-blend-mode'] = 'normal';
         var layer_INNoFurtherRemediation_18 = new L.geoJson(json_INNoFurtherRemediation_18, {
             attribution: '',
+            interactive: true,
+            dataVar: 'json_INNoFurtherRemediation_18',
+            layerName: 'layer_INNoFurtherRemediation_18',
             pane: 'pane_INNoFurtherRemediation_18',
             onEachFeature: pop_INNoFurtherRemediation_18,
             pointToLayer: function (feature, latlng) {
@@ -1299,11 +1127,11 @@
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">Regulatory #</th>\
-                        <td>' + (feature.properties['REGULATORY'] !== null ? Autolinker.link(String(feature.properties['REGULATORY'])) : '') + '</td>\
+                        <td>' + (feature.properties['REGULATORY'] !== null ? autolinker.link(feature.properties['REGULATORY'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Agency</th>\
-                        <td>' + (feature.properties['AGENCY_I_1'] !== null ? Autolinker.link(String(feature.properties['AGENCY_I_1'])) : '') + '</td>\
+                        <td>' + (feature.properties['AGENCY_I_1'] !== null ? autolinker.link(feature.properties['AGENCY_I_1'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -1322,6 +1150,7 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(225,89,137,1.0)',
+                interactive: true,
             }
         }
         map.createPane('pane_INStateCleanup_19');
@@ -1329,6 +1158,9 @@
         map.getPane('pane_INStateCleanup_19').style['mix-blend-mode'] = 'normal';
         var layer_INStateCleanup_19 = new L.geoJson(json_INStateCleanup_19, {
             attribution: '',
+            interactive: true,
+            dataVar: 'json_INStateCleanup_19',
+            layerName: 'layer_INStateCleanup_19',
             pane: 'pane_INStateCleanup_19',
             onEachFeature: pop_INStateCleanup_19,
             pointToLayer: function (feature, latlng) {
@@ -1345,23 +1177,23 @@
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">Brownfield #</th>\
-                        <td>' + (feature.properties['BFD_NO'] !== null ? Autolinker.link(String(feature.properties['BFD_NO'])) : '') + '</td>\
+                        <td>' + (feature.properties['BFD_NO'] !== null ? autolinker.link(feature.properties['BFD_NO'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Site Name</th>\
-                        <td>' + (feature.properties['SITE_NAMES'] !== null ? Autolinker.link(String(feature.properties['SITE_NAMES'])) : '') + '</td>\
+                        <td>' + (feature.properties['SITE_NAMES'] !== null ? autolinker.link(feature.properties['SITE_NAMES'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Details Given</th>\
-                        <td>' + (feature.properties['OTHER_ASSI'] !== null ? Autolinker.link(String(feature.properties['OTHER_ASSI'])) : '') + '</td>\
+                        <td>' + (feature.properties['OTHER_ASSI'] !== null ? autolinker.link(feature.properties['OTHER_ASSI'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">PROGRAM</th>\
-                        <td>' + (feature.properties['PROGRAM'] !== null ? Autolinker.link(String(feature.properties['PROGRAM'])) : '') + '</td>\
+                        <td>' + (feature.properties['PROGRAM'] !== null ? autolinker.link(feature.properties['PROGRAM'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Location</th>\
-                        <td>' + (feature.properties['Location'] !== null ? Autolinker.link(String(feature.properties['Location'])) : '') + '</td>\
+                        <td>' + (feature.properties['Location'] !== null ? autolinker.link(feature.properties['Location'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -1380,6 +1212,7 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(231,113,72,1.0)',
+                interactive: true,
             }
         }
         map.createPane('pane_INBrownfieldsProgram_20');
@@ -1387,6 +1220,9 @@
         map.getPane('pane_INBrownfieldsProgram_20').style['mix-blend-mode'] = 'normal';
         var layer_INBrownfieldsProgram_20 = new L.geoJson(json_INBrownfieldsProgram_20, {
             attribution: '',
+            interactive: true,
+            dataVar: 'json_INBrownfieldsProgram_20',
+            layerName: 'layer_INBrownfieldsProgram_20',
             pane: 'pane_INBrownfieldsProgram_20',
             onEachFeature: pop_INBrownfieldsProgram_20,
             pointToLayer: function (feature, latlng) {
@@ -1403,19 +1239,19 @@
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">IL EPA ID</th>\
-                        <td>' + (feature.properties['Iepaid'] !== null ? Autolinker.link(String(feature.properties['Iepaid'])) : '') + '</td>\
+                        <td>' + (feature.properties['Iepaid'] !== null ? autolinker.link(feature.properties['Iepaid'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Company</th>\
-                        <td>' + (feature.properties['RaCompany'] !== null ? Autolinker.link(String(feature.properties['RaCompany'])) : '') + '</td>\
+                        <td>' + (feature.properties['RaCompany'] !== null ? autolinker.link(feature.properties['RaCompany'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Active Site?</th>\
-                        <td>' + (feature.properties['ActiveSite'] !== null ? Autolinker.link(String(feature.properties['ActiveSite'])) : '') + '</td>\
+                        <td>' + (feature.properties['ActiveSite'] !== null ? autolinker.link(feature.properties['ActiveSite'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Location</th>\
-                        <td>' + (feature.properties['Location'] !== null ? Autolinker.link(String(feature.properties['Location'])) : '') + '</td>\
+                        <td>' + (feature.properties['Location'] !== null ? autolinker.link(feature.properties['Location'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -1434,6 +1270,7 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(183,72,75,1.0)',
+                interactive: true,
             }
         }
         map.createPane('pane_ILSiteRemediationProgram_21');
@@ -1441,6 +1278,9 @@
         map.getPane('pane_ILSiteRemediationProgram_21').style['mix-blend-mode'] = 'normal';
         var layer_ILSiteRemediationProgram_21 = new L.geoJson(json_ILSiteRemediationProgram_21, {
             attribution: '',
+            interactive: true,
+            dataVar: 'json_ILSiteRemediationProgram_21',
+            layerName: 'layer_ILSiteRemediationProgram_21',
             pane: 'pane_ILSiteRemediationProgram_21',
             onEachFeature: pop_ILSiteRemediationProgram_21,
             pointToLayer: function (feature, latlng) {
@@ -1457,19 +1297,19 @@
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">EPA Site ID</th>\
-                        <td>' + (feature.properties['EPASiteID'] !== null ? Autolinker.link(String(feature.properties['EPASiteID'])) : '') + '</td>\
+                        <td>' + (feature.properties['EPASiteID'] !== null ? autolinker.link(feature.properties['EPASiteID'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Site Name</th>\
-                        <td>' + (feature.properties['siteName'] !== null ? Autolinker.link(String(feature.properties['siteName'])) : '') + '</td>\
+                        <td>' + (feature.properties['siteName'] !== null ? autolinker.link(feature.properties['siteName'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">National Priority</th>\
-                        <td>' + (feature.properties['nationalPr'] !== null ? Autolinker.link(String(feature.properties['nationalPr'])) : '') + '</td>\
+                        <td>' + (feature.properties['nationalPr'] !== null ? autolinker.link(feature.properties['nationalPr'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Location</th>\
-                        <td>' + (feature.properties['Location'] !== null ? Autolinker.link(String(feature.properties['Location'])) : '') + '</td>\
+                        <td>' + (feature.properties['Location'] !== null ? autolinker.link(feature.properties['Location'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -1488,6 +1328,7 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(229,182,54,1.0)',
+                interactive: true,
             }
         }
         map.createPane('pane_SuperfundSites_22');
@@ -1495,6 +1336,9 @@
         map.getPane('pane_SuperfundSites_22').style['mix-blend-mode'] = 'normal';
         var layer_SuperfundSites_22 = new L.geoJson(json_SuperfundSites_22, {
             attribution: '',
+            interactive: true,
+            dataVar: 'json_SuperfundSites_22',
+            layerName: 'layer_SuperfundSites_22',
             pane: 'pane_SuperfundSites_22',
             onEachFeature: pop_SuperfundSites_22,
             pointToLayer: function (feature, latlng) {
@@ -1511,19 +1355,19 @@
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">Name</th>\
-                        <td>' + (feature.properties['Landfill_N'] !== null ? Autolinker.link(String(feature.properties['Landfill_N'])) : '') + '</td>\
+                        <td>' + (feature.properties['Landfill_N'] !== null ? autolinker.link(feature.properties['Landfill_N'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Ownership</th>\
-                        <td>' + (feature.properties['Ownership'] !== null ? Autolinker.link(String(feature.properties['Ownership'])) : '') + '</td>\
+                        <td>' + (feature.properties['Ownership'] !== null ? autolinker.link(feature.properties['Ownership'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Year Closed</th>\
-                        <td>' + (feature.properties['Landfill_C'] !== null ? Autolinker.link(String(feature.properties['Landfill_C'])) : '') + '</td>\
+                        <td>' + (feature.properties['Landfill_C'] !== null ? autolinker.link(feature.properties['Landfill_C'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Location</th>\
-                        <td>' + (feature.properties['Location'] !== null ? Autolinker.link(String(feature.properties['Location'])) : '') + '</td>\
+                        <td>' + (feature.properties['Location'] !== null ? autolinker.link(feature.properties['Location'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -1542,6 +1386,7 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(179,122,148,1.0)',
+                interactive: true,
             }
         }
         map.createPane('pane_ClosedLandfills_23');
@@ -1549,6 +1394,9 @@
         map.getPane('pane_ClosedLandfills_23').style['mix-blend-mode'] = 'normal';
         var layer_ClosedLandfills_23 = new L.geoJson(json_ClosedLandfills_23, {
             attribution: '',
+            interactive: true,
+            dataVar: 'json_ClosedLandfills_23',
+            layerName: 'layer_ClosedLandfills_23',
             pane: 'pane_ClosedLandfills_23',
             onEachFeature: pop_ClosedLandfills_23,
             pointToLayer: function (feature, latlng) {
@@ -1565,19 +1413,19 @@
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">FRS_FACILI</th>\
-                        <td>' + (feature.properties['FRS_FACILI'] !== null ? Autolinker.link(String(feature.properties['FRS_FACILI'])) : '') + '</td>\
+                        <td>' + (feature.properties['FRS_FACILI'] !== null ? autolinker.link(feature.properties['FRS_FACILI'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Site Name</th>\
-                        <td>' + (feature.properties['PRIMARY_NA'] !== null ? Autolinker.link(String(feature.properties['PRIMARY_NA'])) : '') + '</td>\
+                        <td>' + (feature.properties['PRIMARY_NA'] !== null ? autolinker.link(feature.properties['PRIMARY_NA'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Site Type</th>\
-                        <td>' + (feature.properties['SITE_TYPE_'] !== null ? Autolinker.link(String(feature.properties['SITE_TYPE_'])) : '') + '</td>\
+                        <td>' + (feature.properties['SITE_TYPE_'] !== null ? autolinker.link(feature.properties['SITE_TYPE_'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Location</th>\
-                        <td>' + (feature.properties['Location'] !== null ? Autolinker.link(String(feature.properties['Location'])) : '') + '</td>\
+                        <td>' + (feature.properties['Location'] !== null ? autolinker.link(feature.properties['Location'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -1596,6 +1444,7 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(247,128,30,1.0)',
+                interactive: true,
             }
         }
         map.createPane('pane_EPABrownfields_24');
@@ -1603,6 +1452,9 @@
         map.getPane('pane_EPABrownfields_24').style['mix-blend-mode'] = 'normal';
         var layer_EPABrownfields_24 = new L.geoJson(json_EPABrownfields_24, {
             attribution: '',
+            interactive: true,
+            dataVar: 'json_EPABrownfields_24',
+            layerName: 'layer_EPABrownfields_24',
             pane: 'pane_EPABrownfields_24',
             onEachFeature: pop_EPABrownfields_24,
             pointToLayer: function (feature, latlng) {
@@ -1619,15 +1471,15 @@
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">Site ID</th>\
-                        <td>' + (feature.properties['Site_ID'] !== null ? Autolinker.link(String(feature.properties['Site_ID'])) : '') + '</td>\
+                        <td>' + (feature.properties['Site_ID'] !== null ? autolinker.link(feature.properties['Site_ID'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Name</th>\
-                        <td>' + (feature.properties['PRIMARY_NA'] !== null ? Autolinker.link(String(feature.properties['PRIMARY_NA'])) : '') + '</td>\
+                        <td>' + (feature.properties['PRIMARY_NA'] !== null ? autolinker.link(feature.properties['PRIMARY_NA'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Location</th>\
-                        <td>' + (feature.properties['Location'] !== null ? Autolinker.link(String(feature.properties['Location'])) : '') + '</td>\
+                        <td>' + (feature.properties['Location'] !== null ? autolinker.link(feature.properties['Location'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -1646,6 +1498,7 @@
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(250,255,57,1.0)',
+                interactive: true,
             }
         }
         map.createPane('pane_RCRAHazardousWaste_25');
@@ -1653,6 +1506,9 @@
         map.getPane('pane_RCRAHazardousWaste_25').style['mix-blend-mode'] = 'normal';
         var layer_RCRAHazardousWaste_25 = new L.geoJson(json_RCRAHazardousWaste_25, {
             attribution: '',
+            interactive: true,
+            dataVar: 'json_RCRAHazardousWaste_25',
+            layerName: 'layer_RCRAHazardousWaste_25',
             pane: 'pane_RCRAHazardousWaste_25',
             onEachFeature: pop_RCRAHazardousWaste_25,
             pointToLayer: function (feature, latlng) {
@@ -1666,15 +1522,16 @@
         bounds_group.addLayer(layer_RCRAHazardousWaste_25);
         map.addLayer(layer_RCRAHazardousWaste_25);
         var baseMaps = {};
-		
+        		
 		
 
 
 		
 //************************************************************			
 		
-// Current Version Part 2 - Start Copy Here
+// Current Version Part 3 - Start Copy Here
 // Contains group layer control, search functionality
+// NOTE: Tweak the var groupedLayer manually if the order has changed
 
 //************************************************************	
 
@@ -1686,48 +1543,48 @@
 		var groupedLayers = {
 			// This section groups layers in the legend. General format of 'Group Title Here': = { comma sep layer lists with icons and titles here...},
 		'Brownfield Sites': {
-			'<img src="legend/RCRAHazardousWaste_25.png" /> RCRA (Hazardous Waste)': layer_RCRAHazardousWaste_25,
-			'<img src="legend/EPABrownfields_24.png" /> EPA Brownfields': layer_EPABrownfields_24,
-			'<img src="legend/ClosedLandfills_23.png" /> Closed Landfills': layer_ClosedLandfills_23,
-			'<img src="legend/SuperfundSites_22.png" /> Superfund Sites': layer_SuperfundSites_22,
-			'<img src="legend/ILSiteRemediationProgram_21.png" /> IL Site Remediation Program': layer_ILSiteRemediationProgram_21,
-			'<img src="legend/INBrownfieldsProgram_20.png" /> IN Brownfields Program': layer_INBrownfieldsProgram_20,
-			'<img src="legend/INStateCleanup_19.png" /> IN State Cleanup': layer_INStateCleanup_19,
-			'<img src="legend/INNoFurtherRemediation_18.png" /> IN No Further Remediation': layer_INNoFurtherRemediation_18,
-			'<img src="legend/ILNoFurtherRemediation_17.png" /> IL No Further Remediation': layer_ILNoFurtherRemediation_17,
-			'<img src="legend/ILLeakingUndergroundStorage_16.png" /> IL Leaking Underground Storage': layer_ILLeakingUndergroundStorage_16,
-			'<img src="legend/ILStateResponseActionSites_15.png" /> IL State Response Action Sites': layer_ILStateResponseActionSites_15,
-			},
+            '<img src="legend/RCRAHazardousWaste_25.png" /> RCRA (Hazardous Waste)': layer_RCRAHazardousWaste_25,
+            '<img src="legend/EPABrownfields_24.png" /> EPA Brownfields': layer_EPABrownfields_24,
+            '<img src="legend/ClosedLandfills_23.png" /> Closed Landfills': layer_ClosedLandfills_23,
+            '<img src="legend/SuperfundSites_22.png" /> Superfund Sites': layer_SuperfundSites_22,
+            '<img src="legend/ILSiteRemediationProgram_21.png" /> IL Site Remediation Program': layer_ILSiteRemediationProgram_21,
+            '<img src="legend/INBrownfieldsProgram_20.png" /> IN Brownfields Program': layer_INBrownfieldsProgram_20,
+            '<img src="legend/INStateCleanup_19.png" /> IN State Cleanup': layer_INStateCleanup_19,
+            '<img src="legend/INNoFurtherRemediation_18.png" /> IN No Further Remediation': layer_INNoFurtherRemediation_18,
+            '<img src="legend/ILNoFurtherRemediation_17.png" /> IL No Further Remediation': layer_ILNoFurtherRemediation_17,
+            '<img src="legend/ILLeakingUndergroundStorage_16.png" /> IL Leaking Underground Storage': layer_ILLeakingUndergroundStorage_16,
+            '<img src="legend/ILStateResponseActionSites_15.png" /> IL State Response Action Sites': layer_ILStateResponseActionSites_15,
+        	},
 		'Economic': {
-			'<img src="legend/OpportunityZones_14.png" /> Opportunity Zones': layer_OpportunityZones_14,
-			'<img src="legend/TaxIncrementFinancingTIF_13.png" /> Tax Increment Financing (TIF)': layer_TaxIncrementFinancingTIF_13,
-			'<img src="legend/HUBZones_12.png" /> HUB Zones': layer_HUBZones_12,
-			'<img src="legend/NewMarketTaxCreditsNMTC_11.png" /> New Market Tax Credits (NMTC)': layer_NewMarketTaxCreditsNMTC_11,
-			},
-		'Social': {
-			'Social Vulnerability Index<br /><table><tr><td style="text-align: center;"><img src="legend/SocialVulnerabilityIndex_10_0010260.png" /></td><td>0.01 - 0.26</td></tr><tr><td style="text-align: center;"><img src="legend/SocialVulnerabilityIndex_10_0260511.png" /></td><td>0.26 - 0.51</td></tr><tr><td style="text-align: center;"><img src="legend/SocialVulnerabilityIndex_10_0510752.png" /></td><td>0.51 - 0.75</td></tr><tr><td style="text-align: center;"><img src="legend/SocialVulnerabilityIndex_10_0751003.png" /></td><td>0.75 - 1.00</td></tr></table>': layer_SocialVulnerabilityIndex_10,
-			},
+            '<img src="legend/OpportunityZones_14.png" /> Opportunity Zones': layer_OpportunityZones_14,
+            '<img src="legend/TaxIncrementFinancingTIF_13.png" /> Tax Increment Financing (TIF)': layer_TaxIncrementFinancingTIF_13,
+            '<img src="legend/HUBZones_12.png" /> HUB Zones': layer_HUBZones_12,
+            '<img src="legend/NewMarketTaxCreditsNMTC_11.png" /> New Market Tax Credits (NMTC)': layer_NewMarketTaxCreditsNMTC_11,
+        	},
 		'Zoning': {
-			'IN Zoning<br /><table><tr><td style="text-align: center;"><img src="legend/INZoning_9_Agriculture0.png" /></td><td>Agriculture</td></tr><tr><td style="text-align: center;"><img src="legend/INZoning_9_BusinessorCommercial1.png" /></td><td>Business or Commercial</td></tr><tr><td style="text-align: center;"><img src="legend/INZoning_9_CentralBusinessDistrict2.png" /></td><td>Central Business District</td></tr><tr><td style="text-align: center;"><img src="legend/INZoning_9_LocalPlanning3.png" /></td><td>Local Planning</td></tr><tr><td style="text-align: center;"><img src="legend/INZoning_9_Manufacturing4.png" /></td><td>Manufacturing</td></tr><tr><td style="text-align: center;"><img src="legend/INZoning_9_OpenSpace5.png" /></td><td>Open Space</td></tr><tr><td style="text-align: center;"><img src="legend/INZoning_9_Residential6.png" /></td><td>Residential</td></tr><tr><td style="text-align: center;"><img src="legend/INZoning_9_Transportation7.png" /></td><td>Transportation</td></tr></table>': layer_INZoning_9,
-			'Cook County Zoning<br /><table><tr><td style="text-align: center;"><img src="legend/CookCountyZoning_8_Agriculture0.png" /></td><td>Agriculture</td></tr><tr><td style="text-align: center;"><img src="legend/CookCountyZoning_8_BusinessorCommercial1.png" /></td><td>Business or Commercial</td></tr><tr><td style="text-align: center;"><img src="legend/CookCountyZoning_8_CentralBusinessDistrict2.png" /></td><td>Central Business District</td></tr><tr><td style="text-align: center;"><img src="legend/CookCountyZoning_8_LocalPlanning3.png" /></td><td>Local Planning</td></tr><tr><td style="text-align: center;"><img src="legend/CookCountyZoning_8_Manufacturing4.png" /></td><td>Manufacturing</td></tr><tr><td style="text-align: center;"><img src="legend/CookCountyZoning_8_NoZoning5.png" /></td><td>No Zoning</td></tr><tr><td style="text-align: center;"><img src="legend/CookCountyZoning_8_OpenSpace6.png" /></td><td>Open Space</td></tr><tr><td style="text-align: center;"><img src="legend/CookCountyZoning_8_Residential7.png" /></td><td>Residential</td></tr><tr><td style="text-align: center;"><img src="legend/CookCountyZoning_8_Transportation8.png" /></td><td>Transportation</td></tr></table>': layer_CookCountyZoning_8,
-			},
+            'IN Zoning<br /><table><tr><td style="text-align: center;"><img src="legend/INZoning_10_Agriculture0.png" /></td><td>Agriculture</td></tr><tr><td style="text-align: center;"><img src="legend/INZoning_10_BusinessorCommercial1.png" /></td><td>Business or Commercial</td></tr><tr><td style="text-align: center;"><img src="legend/INZoning_10_CentralBusinessDistrict2.png" /></td><td>Central Business District</td></tr><tr><td style="text-align: center;"><img src="legend/INZoning_10_LocalPlanning3.png" /></td><td>Local Planning</td></tr><tr><td style="text-align: center;"><img src="legend/INZoning_10_Manufacturing4.png" /></td><td>Manufacturing</td></tr><tr><td style="text-align: center;"><img src="legend/INZoning_10_OpenSpace5.png" /></td><td>Open Space</td></tr><tr><td style="text-align: center;"><img src="legend/INZoning_10_Residential6.png" /></td><td>Residential</td></tr><tr><td style="text-align: center;"><img src="legend/INZoning_10_Transportation7.png" /></td><td>Transportation</td></tr></table>': layer_INZoning_10,
+            'Cook County Zoning<br /><table><tr><td style="text-align: center;"><img src="legend/CookCountyZoning_9_Agriculture0.png" /></td><td>Agriculture</td></tr><tr><td style="text-align: center;"><img src="legend/CookCountyZoning_9_BusinessorCommercial1.png" /></td><td>Business or Commercial</td></tr><tr><td style="text-align: center;"><img src="legend/CookCountyZoning_9_CentralBusinessDistrict2.png" /></td><td>Central Business District</td></tr><tr><td style="text-align: center;"><img src="legend/CookCountyZoning_9_LocalPlanning3.png" /></td><td>Local Planning</td></tr><tr><td style="text-align: center;"><img src="legend/CookCountyZoning_9_Manufacturing4.png" /></td><td>Manufacturing</td></tr><tr><td style="text-align: center;"><img src="legend/CookCountyZoning_9_NoZoning5.png" /></td><td>No Zoning</td></tr><tr><td style="text-align: center;"><img src="legend/CookCountyZoning_9_OpenSpace6.png" /></td><td>Open Space</td></tr><tr><td style="text-align: center;"><img src="legend/CookCountyZoning_9_Residential7.png" /></td><td>Residential</td></tr><tr><td style="text-align: center;"><img src="legend/CookCountyZoning_9_Transportation8.png" /></td><td>Transportation</td></tr></table>': layer_CookCountyZoning_9,
+        	},
 		'Land Use': {
-			'Land Use<br /><table><tr><td style="text-align: center;"><img src="legend/LandUse_7_Agriculture0.png" /></td><td>Agriculture</td></tr><tr><td style="text-align: center;"><img src="legend/LandUse_7_Commercial1.png" /></td><td>Commercial</td></tr><tr><td style="text-align: center;"><img src="legend/LandUse_7_Industrial2.png" /></td><td>Industrial</td></tr><tr><td style="text-align: center;"><img src="legend/LandUse_7_Institutional3.png" /></td><td>Institutional</td></tr><tr><td style="text-align: center;"><img src="legend/LandUse_7_OpenSpace4.png" /></td><td>Open Space</td></tr><tr><td style="text-align: center;"><img src="legend/LandUse_7_Residential5.png" /></td><td>Residential</td></tr><tr><td style="text-align: center;"><img src="legend/LandUse_7_TransportationUtilities6.png" /></td><td>Transportation Utilities</td></tr><tr><td style="text-align: center;"><img src="legend/LandUse_7_VacantAgriculture7.png" /></td><td>Vacant Agriculture</td></tr><tr><td style="text-align: center;"><img src="legend/LandUse_7_Vacant8.png" /></td><td>Vacant</td></tr></table>': layer_LandUse_7,
-			},
+            'Land Use<br /><table><tr><td style="text-align: center;"><img src="legend/LandUse_8_Agriculture0.png" /></td><td>Agriculture</td></tr><tr><td style="text-align: center;"><img src="legend/LandUse_8_Commercial1.png" /></td><td>Commercial</td></tr><tr><td style="text-align: center;"><img src="legend/LandUse_8_Industrial2.png" /></td><td>Industrial</td></tr><tr><td style="text-align: center;"><img src="legend/LandUse_8_Institutional3.png" /></td><td>Institutional</td></tr><tr><td style="text-align: center;"><img src="legend/LandUse_8_OpenSpace4.png" /></td><td>Open Space</td></tr><tr><td style="text-align: center;"><img src="legend/LandUse_8_Residential5.png" /></td><td>Residential</td></tr><tr><td style="text-align: center;"><img src="legend/LandUse_8_TransportationUtilities6.png" /></td><td>Transportation Utilities</td></tr><tr><td style="text-align: center;"><img src="legend/LandUse_8_VacantAgriculture7.png" /></td><td>Vacant Agriculture</td></tr><tr><td style="text-align: center;"><img src="legend/LandUse_8_Vacant8.png" /></td><td>Vacant</td></tr></table>': layer_LandUse_8,
+            },
 		'Environmental': {
-			'<img src="legend/MinimalorReducedFloodHazard_6.png" /> Minimal or Reduced Flood Hazard': layer_MinimalorReducedFloodHazard_6,
-			'<img src="legend/100YearFloodPlain_5.png" /> 100 Year Flood Plain': layer_100YearFloodPlain_5,
-			'<img src="legend/500YearFloodPlain_4.png" /> 500 Year Flood Plain': layer_500YearFloodPlain_4,
-			'<img src="legend/Wetlands_3.png" /> Wetlands': layer_Wetlands_3,
-			'<img src="legend/USGSProtectedAreas_2.png" /> USGS Protected Areas': layer_USGSProtectedAreas_2,
-			},
-		'Base Maps':{
-			"Base Map 1": layer_BaseMap1_1,
-			"Base Map 2": layer_BaseMap2_0
-			}
+            '<img src="legend/USGSProtectedAreas_7.png" /> USGS Protected Areas': layer_USGSProtectedAreas_7,
+            '<img src="legend/Wetlands_6.png" /> Wetlands': layer_Wetlands_6,
+            '<img src="legend/500YearFloodPlain_5.png" /> 500 Year Flood Plain': layer_500YearFloodPlain_5,
+            '<img src="legend/100YearFloodPlain_4.png" /> 100 Year Flood Plain': layer_100YearFloodPlain_4,
+            '<img src="legend/MinimalorReducedFloodHazard_3.png" /> Minimal or Reduced Flood Hazard': layer_MinimalorReducedFloodHazard_3,
+            },
+		'Social': {
+            'Social Vulnerability Index<br /><table><tr><td style="text-align: center;"><img src="legend/SocialVulnerabilityIndex_2_0010260.png" /></td><td>0.01 - 0.26</td></tr><tr><td style="text-align: center;"><img src="legend/SocialVulnerabilityIndex_2_0260511.png" /></td><td>0.26 - 0.51</td></tr><tr><td style="text-align: center;"><img src="legend/SocialVulnerabilityIndex_2_0510752.png" /></td><td>0.51 - 0.75</td></tr><tr><td style="text-align: center;"><img src="legend/SocialVulnerabilityIndex_2_0751003.png" /></td><td>0.75 - 1.00</td></tr></table>': layer_SocialVulnerabilityIndex_2,
+          	},
+		'Base Maps':{  
+            "Base Map 1": layer_BaseMap1_1,
+            "Base Map 2": layer_BaseMap2_0			
+            }
 		}
-		
-		var options = {
+        
+var options = {
 		  // Make the "Base Maps" group exclusive (use radio inputs)
 		  exclusiveGroups: ["Base Maps"],
 		  // Show a checkbox next to non-exclusive group labels for toggling all
@@ -1775,7 +1632,7 @@
 
 //************************************************************	
 
-// Current Version Part 2 - End Copy Here
+// Current Version Part 3 - End Copy Here
 
 //************************************************************	
 
